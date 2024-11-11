@@ -73,3 +73,9 @@ Plugins/*/Intermediate/*
 # Cache files for the editor to use
 DerivedDataCache/*
 /Content/StarterContent
+/Labwork1/Content/StarterContent
+/Labwork1/DerivedDataCache
+/Labwork1/Intermediate
+/Labwork1/Saved
+/Labwork1/Binaries
+/Labwork1/Build
