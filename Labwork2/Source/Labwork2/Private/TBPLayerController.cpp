@@ -8,6 +8,7 @@ ATBPLayerController::ATBPLayerController()
 	
 }
 
+
 void ATBPLayerController::BeginPlay()
 {
 	bEnableClickEvents = true;

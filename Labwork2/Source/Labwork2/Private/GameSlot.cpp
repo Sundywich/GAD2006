@@ -2,10 +2,10 @@
 
 
 #include "GameSlot.h"
-
 #include "TBPLayerController.h"
 #include "Components/BoxComponent.h"
-
+#include "Components/StaticMeshComponent.h"
+#include "UObject/ConstructorHelpers.h"
 #include "UnitBase.h"
 
 // Sets default values
@@ -29,19 +29,23 @@ AGameSlot::AGameSlot()
 	Plane -> SetStaticMesh(DefaultSlothMesh.Object);
 }
 
-void AGameSlot::SetState(EGridState NewState)
+void AGameSlot::SetState(EGridState NewState) /* Always took an error that told me "you can't use ConstructorHelper outside of constructor.
+												So, I commented this part. But I wrote the assignment code according to this,
+												so if somehow I can make ConstructorHelpers happen, the existing code will still work.
+												*/
 {
+	/* 
 	GridState = NewState;
 
-	// When you define a function as "static" you make it a global thingy. And this will be called once for the lifetime.
+	
 	static ConstructorHelpers::FObjectFinder<UMaterialInterface>
-		DefaultSlotMaterial(TEXT("Material'/Game/Materials/MAT_GridSlot.MAT_GridSlot'"));
+		DefaultSlotMaterial(TEXT("/Script/Engine.Material'/Game/Materials/MAT_GridSlot.MAT_GridSlot'")); 
 	static ConstructorHelpers::FObjectFinder<UMaterialInterface>
-		DefaultSlotMaterial_H(TEXT("MaterialInstanceConstant'/Game/Materials/MAT_GridSlot_Highlighted.MAT_GridSlot_Highlighted'"));
+		DefaultSlotMaterial_H(TEXT("/Script/Engine.MaterialInstanceConstant'/Game/Materials/MAT_GridSlot_Highlighted.MAT_GridSlot_Highlighted'"));
 	static ConstructorHelpers::FObjectFinder<UMaterialInterface>
-		DefaultSlotMaterial_O(TEXT("MaterialInstanceConstant'/Game/Materials/MAT_GridSlot_Offensive.MAT_GridSlot_Offensive'"));
+		DefaultSlotMaterial_O(TEXT("/Script/Engine.MaterialInstanceConstant'/Game/Materials/MAT_GridSlot_Offensive.MAT_GridSlot_Offensive'"));
 	static ConstructorHelpers::FObjectFinder<UMaterialInterface>
-		DefaultSlotMaterial_S(TEXT("MaterialInstanceConstant'/Game/Materials/MAT_GridSlot_Supportive.MAT_GridSlot_Supportive'"));
+		DefaultSlotMaterial_S(TEXT("/Script/Engine.MaterialInstanceConstant'/Game/Materials/MAT_GridSlot_Supportive.MAT_GridSlot_Supportive'"));
 
 	switch (NewState)
 	{
@@ -58,6 +62,7 @@ void AGameSlot::SetState(EGridState NewState)
 			Plane -> SetMaterial(0, DefaultSlotMaterial_S.Object);
 			break;
 	}
+	*/
 }
 
 void AGameSlot::SpawnUnitHere(TSubclassOf<AUnitBase> UnitClass)
@@ -66,7 +71,6 @@ void AGameSlot::SpawnUnitHere(TSubclassOf<AUnitBase> UnitClass)
 	AUnitBase* NewUnit = Cast<AUnitBase>(GWorld -> SpawnActor(UnitClass, &Location));
 	if(NewUnit) NewUnit -> AssignToSlot(this);
 }
-
 
 
 // Called when the game starts or when spawned

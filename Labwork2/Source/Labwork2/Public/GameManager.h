@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameGrid.h"
 #include "UnitBase.h"
+#include "Commands/Command.h"
 #include "GameFramework/Actor.h"
 #include "GameManager.generated.h"
 
@@ -61,4 +62,10 @@ public:
 
 private:
 	AUnitBase* ThePlayer;
+	TArray<TSharedRef<Command>> CommandPool;
+	TSharedPtr<Command> CurrentCommand;
+
+	UFUNCTION(BlueprintCallable)
+	bool UndoLastMove();
+
 };

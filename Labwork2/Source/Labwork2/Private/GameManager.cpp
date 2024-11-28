@@ -3,6 +3,8 @@
 
 #include "GameManager.h"
 #include "TBPLayerController.h"
+#include "Commands/Command.h"
+#include "Commands/MoveCommand.h"
 
 // Sets default values
 AGameManager::AGameManager()
@@ -11,6 +13,8 @@ AGameManager::AGameManager()
 	PrimaryActorTick.bCanEverTick = true;
 
 }
+
+
 
 // Called when the game starts or when spawned
 void AGameManager::BeginPlay()
@@ -45,11 +49,61 @@ void AGameManager::CreateLevelActors(FSLevelInfo& Info)
 	}
 }
 
+void AGameManager::OnActorClicked(AActor* Actor, FKey button)
+{
+	if(CurrentCommand.IsValid() && CurrentCommand -> IsExecuting()) return;
+
+	AGameSlot* Slot = Cast<AGameSlot>(Actor);
+
+	// Clicked on a non slot actor?
+	if(!Slot) return;
+
+	// Does the player clicked?
+	if(!ThePlayer)
+	{
+		UE_LOG(LogTemp, Error, TEXT("No player unit detected!"))
+		return;
+	}
+
+	// Empty slot?
+	if(Slot -> Unit == nullptr)
+	{
+		// Move player
+		TSharedRef<MoveCommand> Cmd =
+			MakeShared<MoveCommand>(ThePlayer -> Slot -> GridPosition, Slot -> GridPosition);
+		CommandPool.Add(Cmd);
+		Cmd -> Execute();
+		CurrentCommand = Cmd;
+	}
+}
+
+bool AGameManager::UndoLastMove()
+{
+	
+	if(CommandPool.IsEmpty())
+	{
+		GEngine -> AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("No MoveCommand Remaining, Unable to Undo"));
+		return false;
+	}
+	
+	TSharedRef <MoveCommand> PreviousMove = StaticCastSharedRef<MoveCommand>(CommandPool.Pop());
+	PreviousMove -> Revert();
+		
+	GEngine -> AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Undo Completed Successfully"));
+	return true;
+
+}
+
 
 // Called every frame
 void AGameManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if(CurrentCommand.IsValid())
+	{
+		CurrentCommand -> Update(DeltaTime);
+	}
 
 }
 

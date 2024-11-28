@@ -49,20 +49,15 @@ public:
 	UStaticMeshComponent* Plane;
 
 	UPROPERTY(VisibleAnywhere)
-	AUnitBase* Unit;
+	AUnitBase* Unit; 
+
+private:
 	
 	EGridState GridState;
 
 	UFUNCTION()
 	void OnGridClicked(AActor* TouchedActor, FKey ButtonPressed);
 
-	UPROPERTY(BlueprintReadWrite)
-	FSGridPosition GridPosition;
-	
-	UFUNCTION()
-	void SetState(EGridState NewState);
-
-	void SpawnUnitHere(TSubclassOf<AUnitBase> UnitClass);
 	
 protected:
 	// Called when the game starts or when spawned
@@ -71,5 +66,13 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	
+	UPROPERTY(BlueprintReadWrite)
+	FSGridPosition GridPosition;
+
+	UFUNCTION()
+	void SetState(EGridState NewState);
+
+	void SpawnUnitHere(TSubclassOf<AUnitBase> UnitClass);
 
 };
