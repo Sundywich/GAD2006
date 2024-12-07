@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/BoxComponent.h"
 #include "UnitBase.h"
+#include "InputCore.h"
 #include "GameSlot.generated.h"
 
 USTRUCT(Blueprintable)
@@ -37,6 +38,7 @@ UCLASS()
 class AGameSlot : public AActor
 {
 	GENERATED_BODY()
+
 	
 public:	
 	// Sets default values for this actor's properties
@@ -57,6 +59,8 @@ private:
 
 	UFUNCTION()
 	void OnGridClicked(AActor* TouchedActor, FKey ButtonPressed);
+
+	
 
 	
 protected:

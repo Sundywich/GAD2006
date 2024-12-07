@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameSlot.h"
 #include "GameFramework/Actor.h"
-#include "Components/BoxComponent.h"
 #include "GameGrid.generated.h"
 
 UCLASS()

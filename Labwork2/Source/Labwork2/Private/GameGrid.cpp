@@ -4,8 +4,8 @@
 #include "GameGrid.h"
 #include "Components/ChildActorComponent.h"
 
-	// Global reference to the GameGrid
-	AGameGrid* AGameGrid::GameGrid = nullptr;
+// Global reference to the GameGrid
+AGameGrid* AGameGrid::GameGrid = nullptr;
 
 // Sets default values
 AGameGrid::AGameGrid() :
