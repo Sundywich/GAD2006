@@ -17,7 +17,8 @@ enum class EBodyPart : uint8
 	BP_Hands = 3,
 	BP_Legs = 4,
 	BP_Beard = 5,
-	BP_COUNT = 6,
+	BP_Eyebrow = 6,
+	BP_COUNT = 7,
 };
 
 USTRUCT(BlueprintType)
@@ -44,6 +45,21 @@ struct FSBodyPartSelection
 	bool isFemale;
 };
 
+USTRUCT(BlueprintType)
+struct FSPlayerInfo
+{
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FText Nickname;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FSBodyPartSelection BodyParts;
+
+	bool Ready;
+	
+};
+
 UCLASS()
 class ANetBaseCharacter : public ACharacter
 {
@@ -53,15 +69,53 @@ public:
 	// Sets default values for this character's properties
 	ANetBaseCharacter();
 
-protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	virtual void OnConstruction(const FTransform& Transform) override;
 
-public:	
-	// Called every frame
+public:
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
+	UFUNCTION(BlueprintCallable)
+	void ChangeBodyPart(EBodyPart index, int value, bool DirectSet);
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeGender(bool isFemale);
+
+	UPROPERTY(BlueprintReadWrite, ReplicatedUsing = OnRep_PlayerInfoChanged)
+	FSBodyPartSelection PartSelection;
+
+	UFUNCTION(Server, Reliable)
+	void SubmitPlayerInfoToServer(FSPlayerInfo Info);
+
+	UFUNCTION()
+	void OnRep_PlayerInfoChanged();
+
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+private:
+	UPROPERTY()
+	USkeletalMeshComponent* PartFace;
+
+	UPROPERTY()
+	UStaticMeshComponent* PartHair;
+
+	UPROPERTY()
+	UStaticMeshComponent* PartBeard;
+
+	UPROPERTY()
+	UStaticMeshComponent* PartEyes;
+
+	UPROPERTY()
+	USkeletalMeshComponent* PartHands;
+
+	UPROPERTY()
+	USkeletalMeshComponent* PartLegs;
+
+	UPROPERTY()
+	UStaticMeshComponent* PartEyebrow;
+
+	static FSMeshAssetList* GetBodyPartList(EBodyPart part, bool isFemale);
+
+	void UpdateBodyParts();
 
 };

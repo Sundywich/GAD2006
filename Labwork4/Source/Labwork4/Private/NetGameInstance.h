@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "NetBaseCharacter.h"
 #include "Engine/GameInstance.h"
 #include "NetGameInstance.generated.h"
 
@@ -16,8 +17,11 @@ class UNetGameInstance : public UGameInstance
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void host (FString MapName);
+	void Host (FString MapName, FSPlayerInfo PlayerInfo);
 
 	UFUNCTION(BlueprintCallable)
-	void join (FString Address);
+	void Join (FString Address, FSPlayerInfo PlayerInfo);
+
+	UPROPERTY(BlueprintReadWrite)
+	FSPlayerInfo PlayerInfo;	
 };
