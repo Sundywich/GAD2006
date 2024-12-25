@@ -30,6 +30,9 @@ public:
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
+	UPROPERTY(BlueprintReadWrite)
+	float MovementScale;
+
 	UFUNCTION()
 	void OnRep_bIsRunning();
 
