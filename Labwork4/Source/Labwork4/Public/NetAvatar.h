@@ -28,8 +28,28 @@ public:
 
 	virtual void BeginPlay() override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	UFUNCTION()
+	void OnRep_bIsRunning();
+
+	UFUNCTION()
+	void UpdateMovementSpeed();
+
+	UFUNCTION(Server, Reliable)
+	void ServerSetIsRunning(bool _isRunning);
+
+public:
+
+	UPROPERTY(EditAnywhere, BLueprintReadWrite)
+	float RunSpeed;
+
+	UPROPERTY(ReplicatedUsing = OnRep_bIsRunning)
+	bool bIsRunning;
 
 private:
 	void MoveForward(float Amount);
 	void MoveRight(float Amount);
+	void StartRunning();
+	void StopRunning();
 };
