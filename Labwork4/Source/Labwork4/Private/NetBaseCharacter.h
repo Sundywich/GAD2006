@@ -35,18 +35,6 @@ struct FSMeshAssetList : public FTableRowBase
 	TArray<UStaticMesh*> ListStatic;
 };
 
-USTRUCT(BlueprintType)
-struct FSBodyPartSelection
-{
-	GENERATED_USTRUCT_BODY()
-
-	UPROPERTY()
-	int Indices[(int)EBodyPart::BP_COUNT];
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool isFemale;
-};
-
 UCLASS()
 class ANetBaseCharacter : public ACharacter
 {
@@ -62,9 +50,15 @@ public:
 public:
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(BLueprintPure)
+	UFUNCTION(BlueprintPure)
 	FString GetCustomizationData();
 	void ParseCustomizationData(FString Data);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	FText GetCharacterName();
+
+	UFUNCTION(BlueprintCallable)
+	void SetCharacterName(FText Name);
 
 	UFUNCTION(BlueprintCallable)
 	void ChangeBodyPart(EBodyPart index, int value, bool DirectSet);
@@ -112,6 +106,8 @@ public:
 private:
 
 	int BodyPartIndices[(int)EBodyPart::BP_COUNT];
+
+	FText CharacterName;
 
 	void UpdateBodyParts();
 	static FSMeshAssetList* GetBodyPartList(EBodyPart part, bool isFemale);

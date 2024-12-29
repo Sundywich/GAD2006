@@ -220,7 +220,6 @@ void ANetBaseCharacter::ChangeGender(bool _isFemale)
 }
 
 
-
 FSMeshAssetList* ANetBaseCharacter::GetBodyPartList(EBodyPart part, bool isFemale)
 {
 	FString Name = FString::Printf(TEXT("%s%s"), isFemale ? TEXT("Female") : TEXT("Male"), BodyPartNames[(int)part]);
@@ -231,6 +230,18 @@ void ANetBaseCharacter::OnConstruction(const FTransform& Transform)
 {
 	UpdateBodyParts();
 }
+
+
+
+FText ANetBaseCharacter::GetCharacterName()
+{
+	return CharacterName;
+}
+void ANetBaseCharacter::SetCharacterName(FText Name)
+{
+	CharacterName = Name;
+}
+
 
 
 

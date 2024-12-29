@@ -30,7 +30,7 @@ void ANetGameState::TriggerRestart_Implementation()
 	OnRestart();
 }
 
-ANetPlayerState* ANetGameState::GetPlayerStateByIndex(int PlayerIndex)
+ANetPlayerState* ANetGameState::GetPlayerStateByIndex(int PlayerIndex) // Give me the state of the player that's equal to this index 
 {
 	for(APlayerState* PS : PlayerArray)
 	{

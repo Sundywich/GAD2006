@@ -23,8 +23,11 @@ public:
 	void AvatarsOverlapped(ANetAvatar* AvatarA, ANetAvatar* AvatarB);
 
 	UFUNCTION(BlueprintCallable)
-	void EndGame();
+	void TimeIsFinished();
 
+	UFUNCTION(BlueprintCallable)
+	void EndGame();
+	
 private:
 	int TotalPlayerCount;
 	int TotalGames;
@@ -35,4 +38,5 @@ private:
 	AActor* GetPlayerStart(FString Name, int Index);
 
 	AActor* AssignTeamAndPlayerStart(AController* Player);
+	
 };

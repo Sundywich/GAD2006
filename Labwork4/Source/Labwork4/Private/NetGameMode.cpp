@@ -16,6 +16,7 @@ ANetGameMode::ANetGameMode()
 	GameStateClass = ANetGameState::StaticClass();
 }
 
+
 AActor* ANetGameMode::GetPlayerStart(FString Name, int Index)
 {
 	FName PSName;
@@ -28,11 +29,12 @@ AActor* ANetGameMode::GetPlayerStart(FString Name, int Index)
 		PSName = *FString::Printf(TEXT("%s%d"), *Name, Index % 4);
 	}
 
+	// Iterator thingy actually gets all of the APlayerStart actors in the world but for a for loop type. So that we can make things easier and cheaper.
 	for(TActorIterator<APlayerStart> It(GWorld); It; ++It)
 	{
 		if(APlayerStart* PS = Cast<APlayerStart>(*It))
 		{
-			if (PS -> PlayerStartTag == PSName) return *It;
+			if (PS -> PlayerStartTag == PSName) return *It; // Then we return a playerstart 
 		}
 	}
 	
@@ -40,12 +42,13 @@ AActor* ANetGameMode::GetPlayerStart(FString Name, int Index)
 }
 
 
-AActor* ANetGameMode::ChoosePlayerStart_Implementation(AController* Player)
+AActor* ANetGameMode::ChoosePlayerStart_Implementation(AController* Player) 
 {
 	AActor* Start = AssignTeamAndPlayerStart(Player);
 	return Start ? Start : Super::ChoosePlayerStart_Implementation(Player);
 }
 
+// This is also again to assign playerstart and also assign the joined player to a team
 AActor* ANetGameMode::AssignTeamAndPlayerStart(AController* Player)
 {
 	AActor* Start = nullptr;
@@ -75,7 +78,7 @@ AActor* ANetGameMode::AssignTeamAndPlayerStart(AController* Player)
 	}
 
 	return Start;
-}
+} 
 
 
 void ANetGameMode::AvatarsOverlapped(ANetAvatar* AvatarA, ANetAvatar* AvatarB)
@@ -84,11 +87,13 @@ void ANetGameMode::AvatarsOverlapped(ANetAvatar* AvatarA, ANetAvatar* AvatarB)
 
 	if(GState == nullptr || GState -> WinningPlayer >= 0) return;
 
+	// Check player states
 	ANetPlayerState* StateA = AvatarA -> GetPlayerState<ANetPlayerState>();
 	ANetPlayerState* StateB = AvatarB -> GetPlayerState<ANetPlayerState>();
 	if(StateA -> TeamID == StateB -> TeamID) return;
 
-	if(StateA -> TeamID == EPlayerTeam::TEAM_Blue)
+	// See which one is on the red team and assign it as the winning player *THIS PART IS IMPORTANT*
+	if(StateA -> TeamID == EPlayerTeam::TEAM_Red)
 	{
 		GState -> WinningPlayer = StateA -> PlayerIndex;
 	}
@@ -97,9 +102,11 @@ void ANetGameMode::AvatarsOverlapped(ANetAvatar* AvatarA, ANetAvatar* AvatarB)
 		GState -> WinningPlayer = StateB -> PlayerIndex;
 	}
 
+	// Close collisions to make sure this function doesn't run again
 	AvatarA -> GetCapsuleComponent() -> SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
 	AvatarB -> GetCapsuleComponent() -> SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
 
+	// Run on victory
 	GState -> OnVictory();
 
 	for (APlayerController* Player : AllPlayers)
@@ -119,6 +126,12 @@ void ANetGameMode::AvatarsOverlapped(ANetAvatar* AvatarA, ANetAvatar* AvatarB)
 	FTimerHandle EndGameTimerHandle;
 	GWorld -> GetTimerManager().SetTimer(EndGameTimerHandle, this, &ANetGameMode::EndGame, 2.5f, false);
 }
+
+void ANetGameMode::TimeIsFinished()
+{
+	
+}
+
 
 void ANetGameMode::EndGame()
 {

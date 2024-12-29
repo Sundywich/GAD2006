@@ -7,13 +7,19 @@
 void UNetGameInstance::Host(FString MapName, FSPlayerInfo Info)
 {
 	GEngine -> AddOnScreenDebugMessage(0, 1.f, FColor::Red, "Hosting Game...");
-	PlayerInfo = Info;
+	PlayerInfo = Info; // PlayerInfo will have its own copy in game instance
 	GWorld -> ServerTravel(FString::Printf(TEXT("/Game/Maps/%s?listen"), *MapName));
 }
 
-void UNetGameInstance::Join(FString Address, FSPlayerInfo Info)
+void UNetGameInstance::Join(FSPlayerInfo Info)
 {
-	GEngine -> AddOnScreenDebugMessage(0, 1.f, FColor::Green, FString::Printf(TEXT("Joining Game at %s...")), *Address);
+	GEngine -> AddOnScreenDebugMessage(0, 1.f, FColor::Green, FString::Printf(TEXT("Joining Game at %s...")), *IPAdressToJoin);
 	PlayerInfo = Info;
-	GWorld -> GetFirstPlayerController() -> ClientTravel(Address, ETravelType::TRAVEL_Absolute);
+	GWorld -> GetFirstPlayerController() -> ClientTravel(IPAdressToJoin, ETravelType::TRAVEL_Absolute);
 }
+
+void UNetGameInstance::SetIPAdressToJoin(FString IP)
+{
+	IPAdressToJoin = IP;
+}
+

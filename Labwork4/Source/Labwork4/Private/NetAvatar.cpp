@@ -72,9 +72,16 @@ void ANetAvatar::StartRunning()
 	else
 	{
 		ServerSetIsRunning(true);
-		UpdateMovementSpeed();
-
-		GEngine -> AddOnScreenDebugMessage(0, 3.0f, FColor::Blue, "Started Client Running");
+		OnRep_bIsRunning();
+		
+		FString BoolText = bIsRunning ? TEXT("True") : TEXT("False");
+		GEngine->AddOnScreenDebugMessage(
+			-1,                             // Unique Key (-1 means it creates a new message every time)
+			5.0f,                           // Duration (seconds)
+			FColor::Green,                  // Text color
+			FString::Printf(TEXT("bIsRunning: %s"), *BoolText) // Format the message
+		);
+		
 	}
 		
 }
@@ -91,9 +98,16 @@ void ANetAvatar::StopRunning()
 	else
 	{
 		ServerSetIsRunning(false);
-		UpdateMovementSpeed();
+		OnRep_bIsRunning();
+		// UpdateMovementSpeed();
 
-		GEngine -> AddOnScreenDebugMessage(0, 3.0f, FColor::Blue, "Stopped Client Running");
+		FString BoolText = bIsRunning ? TEXT("True") : TEXT("False");
+		GEngine->AddOnScreenDebugMessage(
+			-1,                             // Unique Key (-1 means it creates a new message every time)
+			5.0f,                           // Duration (seconds)
+			FColor::Green,                  // Text color
+			FString::Printf(TEXT("bIsRunning: %s"), *BoolText) // Format the message
+		);
 	}
 }
 
@@ -101,13 +115,22 @@ void ANetAvatar::StopRunning()
 void ANetAvatar::OnRep_bIsRunning()
 {
 	UpdateMovementSpeed();
+	GEngine -> AddOnScreenDebugMessage(5, 3.0f, FColor::Blue, FString::Printf(TEXT("MaxSpeed: %f"), GetCharacterMovement() -> MaxWalkSpeed));
 }
 
 void ANetAvatar::UpdateMovementSpeed()
 {
 	if(GetCharacterMovement())
 	{
-		GetCharacterMovement() -> MaxWalkSpeed = bIsRunning ? RunSpeed : 600.0f;
+		if(bIsRunning)
+		{
+			GetCharacterMovement() -> MaxWalkSpeed = 1200.0f;
+		}
+		else
+		{
+			GetCharacterMovement() -> MaxWalkSpeed = 600.0f;
+		}
+		GetCharacterMovement()->SetMovementMode(MOVE_Walking);
 	}
 }
 
@@ -115,3 +138,4 @@ void ANetAvatar::ServerSetIsRunning_Implementation(bool _isRunning)
 {
 	bIsRunning = _isRunning;
 }
+

@@ -22,7 +22,7 @@ public:
 
 	ANetGameState();
 
-	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Winner)
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Winner) // every player is marked with an index in their playerstate
 	int WinningPlayer;
 
 	UFUNCTION()

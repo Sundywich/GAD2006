@@ -12,6 +12,7 @@ void ANetPlayerState::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>
 	DOREPLIFETIME(ANetPlayerState, PlayerIndex);
 }
 
+// Runs after client player recieved their PlayerInfo
 void ANetPlayerState::OnRep_PlayerInfo()
 {
 	ANetBaseCharacter* Char = Cast<ANetBaseCharacter>(GetPawn());
@@ -21,6 +22,7 @@ void ANetPlayerState::OnRep_PlayerInfo()
 	}
 	else
 	{
+		// To make a loop for double triple checking
 		FTimerHandle PlayerInfoUpdateTimer;
 		GWorld -> GetTimerManager().SetTimer(PlayerInfoUpdateTimer, this, &ANetPlayerState::OnRep_PlayerInfo, 0.25f, false);
 	}

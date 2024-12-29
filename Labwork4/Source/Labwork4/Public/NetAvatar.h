@@ -47,9 +47,9 @@ public:
 	UPROPERTY(EditAnywhere, BLueprintReadWrite)
 	float RunSpeed;
 
-	UPROPERTY(ReplicatedUsing = OnRep_bIsRunning)
+	UPROPERTY(VisibleAnywhere, ReplicatedUsing = OnRep_bIsRunning)
 	bool bIsRunning;
-
+	
 private:
 	void MoveForward(float Amount);
 	void MoveRight(float Amount);

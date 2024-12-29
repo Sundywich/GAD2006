@@ -53,8 +53,14 @@ public:
 	void Host (FString MapName, FSPlayerInfo PlayerInfo);
 
 	UFUNCTION(BlueprintCallable)
-	void Join (FString Address, FSPlayerInfo PlayerInfo);
+	void Join (FSPlayerInfo PlayerInfo);
 
 	UPROPERTY(BlueprintReadWrite)
-	FSPlayerInfo PlayerInfo;	
+	FSPlayerInfo PlayerInfo;
+
+	
+	FString IPAdressToJoin;
+
+	UFUNCTION(BlueprintCallable)
+	void SetIPAdressToJoin(FString IP);
 };
