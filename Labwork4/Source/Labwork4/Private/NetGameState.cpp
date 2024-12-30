@@ -3,6 +3,7 @@
 
 #include "NetGameState.h"
 
+#include "NetAvatar.h"
 #include "NetPlayerState.h"
 #include "Net/UnrealNetwork.h"
 
@@ -43,6 +44,7 @@ ANetPlayerState* ANetGameState::GetPlayerStateByIndex(int PlayerIndex) // Give m
 
 	return nullptr;
 }
+
 
 
 

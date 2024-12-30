@@ -23,10 +23,27 @@ public:
 	void AvatarsOverlapped(ANetAvatar* AvatarA, ANetAvatar* AvatarB);
 
 	UFUNCTION(BlueprintCallable)
+	void Timer();
+
+	UFUNCTION(Server, Reliable)
 	void TimeIsFinished();
 
 	UFUNCTION(BlueprintCallable)
 	void EndGame();
+	
+	virtual void BeginPlay() override;
+
+	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float MaxTimer;
+
+	UPROPERTY()
+	float CurrentTimer;
+
+	UPROPERTY()
+	FTimerHandle GameTimerHandle;
 	
 private:
 	int TotalPlayerCount;

@@ -22,13 +22,13 @@ public:
 
 	ANetGameState();
 
-	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Winner) // every player is marked with an index in their playerstate
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, ReplicatedUsing = OnRep_Winner) // every player is marked with an index in their playerstate
 	int WinningPlayer;
 
 	UFUNCTION()
 	void OnRep_Winner();
 
-	UFUNCTION(BlueprintImplementableEvent)
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void OnVictory();
 
 	UFUNCTION(BlueprintImplementableEvent)

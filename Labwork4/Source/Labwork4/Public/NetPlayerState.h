@@ -20,10 +20,12 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, ReplicatedUsing = OnRep_PlayerInfo)
 	FSPlayerInfo Data;
 
-	UPROPERTY(BlueprintReadOnly, Replicated)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Replicated)
 	int PlayerIndex;
 
 	EPlayerTeam TeamID;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Replicated)
 	EGameResults Result;
 
 public:

@@ -4,7 +4,7 @@
 #include "NetAvatar.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
-ANetAvatar::ANetAvatar() : MovementScale(1.0f), RunSpeed(1200.0f)
+ANetAvatar::ANetAvatar() : MovementScale(1.0f), RunSpeed(1200.0f), WalkSpeed(600.0f)
 {
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm-> SetupAttachment(RootComponent);
@@ -64,78 +64,46 @@ void ANetAvatar::StartRunning()
 {
 	if(HasAuthority())
 	{
-		bIsRunning = true;
-		UpdateMovementSpeed();
-
-		GEngine -> AddOnScreenDebugMessage(0, 3.0f, FColor::Green, "Started Running");
+		SetRunState(true);
+		UE_LOG(LogTemp, Display, TEXT("Server start Running"));
 	}
 	else
 	{
-		ServerSetIsRunning(true);
-		OnRep_bIsRunning();
-		
-		FString BoolText = bIsRunning ? TEXT("True") : TEXT("False");
-		GEngine->AddOnScreenDebugMessage(
-			-1,                             // Unique Key (-1 means it creates a new message every time)
-			5.0f,                           // Duration (seconds)
-			FColor::Green,                  // Text color
-			FString::Printf(TEXT("bIsRunning: %s"), *BoolText) // Format the message
-		);
-		
+		ServerSetRunState(true);
+		UE_LOG(LogTemp, Display, TEXT("Server start Running"));
 	}
-		
 }
 
 void ANetAvatar::StopRunning()
 {
 	if(HasAuthority())
 	{
-		bIsRunning = false;
-		UpdateMovementSpeed();
-
-		GEngine -> AddOnScreenDebugMessage(0, 3.0f, FColor::Red, "Stopped Running");
+		SetRunState(false);
+		UE_LOG(LogTemp, Display, TEXT("Server stop Running"));
 	}
 	else
 	{
-		ServerSetIsRunning(false);
-		OnRep_bIsRunning();
-		// UpdateMovementSpeed();
-
-		FString BoolText = bIsRunning ? TEXT("True") : TEXT("False");
-		GEngine->AddOnScreenDebugMessage(
-			-1,                             // Unique Key (-1 means it creates a new message every time)
-			5.0f,                           // Duration (seconds)
-			FColor::Green,                  // Text color
-			FString::Printf(TEXT("bIsRunning: %s"), *BoolText) // Format the message
-		);
+		ServerSetRunState(false);
+		UE_LOG(LogTemp, Display, TEXT("Client stop running"));
 	}
 }
 
 
 void ANetAvatar::OnRep_bIsRunning()
 {
-	UpdateMovementSpeed();
+	SetRunState(bIsRunning); // to be sure
 	GEngine -> AddOnScreenDebugMessage(5, 3.0f, FColor::Blue, FString::Printf(TEXT("MaxSpeed: %f"), GetCharacterMovement() -> MaxWalkSpeed));
 }
 
-void ANetAvatar::UpdateMovementSpeed()
+void ANetAvatar::ServerSetRunState_Implementation(bool _isRunning)
 {
-	if(GetCharacterMovement())
-	{
-		if(bIsRunning)
-		{
-			GetCharacterMovement() -> MaxWalkSpeed = 1200.0f;
-		}
-		else
-		{
-			GetCharacterMovement() -> MaxWalkSpeed = 600.0f;
-		}
-		GetCharacterMovement()->SetMovementMode(MOVE_Walking);
-	}
+	SetRunState(_isRunning);
 }
 
-void ANetAvatar::ServerSetIsRunning_Implementation(bool _isRunning)
+void ANetAvatar::SetRunState(bool bNewRunState)
 {
-	bIsRunning = _isRunning;
+	bIsRunning = bNewRunState;
+	GetCharacterMovement()->MaxWalkSpeed = bIsRunning ? RunSpeed : WalkSpeed;
 }
+
 

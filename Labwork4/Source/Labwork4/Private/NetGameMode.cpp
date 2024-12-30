@@ -2,14 +2,18 @@
 
 
 #include "NetGameMode.h"
+
+#include <ios>
+
 #include "NetBaseCharacter.h"
 #include "NetGameState.h"
 #include "NetPlayerState.h"
 #include "EngineUtils.h"
 #include "GameFramework/PlayerStart.h"
 #include "Components/CapsuleComponent.h"
+#include "Slate/SGameLayerManager.h"
 
-ANetGameMode::ANetGameMode()
+ANetGameMode::ANetGameMode() : MaxTimer(30.0f)
 {
 	DefaultPawnClass = ANetBaseCharacter::StaticClass();
 	PlayerStateClass = ANetPlayerState::StaticClass();
@@ -127,10 +131,61 @@ void ANetGameMode::AvatarsOverlapped(ANetAvatar* AvatarA, ANetAvatar* AvatarB)
 	GWorld -> GetTimerManager().SetTimer(EndGameTimerHandle, this, &ANetGameMode::EndGame, 2.5f, false);
 }
 
-void ANetGameMode::TimeIsFinished()
+void ANetGameMode::Timer()
 {
-	
+	if(HasAuthority())
+	{
+		if (CurrentTimer > 0)
+		{
+			CurrentTimer--;
+			GEngine -> AddOnScreenDebugMessage(-1, 2.5f, FColor::Red, FString::Printf(TEXT("Timer is %f"), CurrentTimer));
+		}
+		else
+		{
+			TimeIsFinished();
+		}
+	}
 }
+
+void ANetGameMode::TimeIsFinished_Implementation()
+{
+	ANetGameState* GState = GetGameState<ANetGameState>();
+	if(GState == nullptr || GState -> WinningPlayer >= 0) return;
+
+	for (APlayerController* Player : AllPlayers)
+	{
+		auto State = Player -> GetPlayerState<ANetPlayerState>();
+
+		if(State -> TeamID == EPlayerTeam::TEAM_Blue)
+		{
+			// Set the game's winner
+			GState -> WinningPlayer = State -> PlayerIndex;
+			State -> Result = EGameResults::RESULT_Won;
+
+			GEngine -> AddOnScreenDebugMessage(-1, 2.5f,FColor::Magenta, FString::Printf(TEXT("Winning Playe Index: %i"), GState -> WinningPlayer) );
+			
+		}
+		else
+		{
+			State -> Result = EGameResults::RESULT_Lost;
+		}
+		
+	}
+
+	GState -> OnVictory();
+	
+	FTimerHandle EndGameTimerHandle;
+	GWorld -> GetTimerManager().SetTimer(EndGameTimerHandle, this, &ANetGameMode::EndGame, 2.5f, false);
+}
+
+void ANetGameMode::BeginPlay()
+{
+	Super::BeginPlay();
+
+	CurrentTimer = 30.0f;
+	GWorld -> GetTimerManager().SetTimer(GameTimerHandle, this, &ANetGameMode::Timer, 1.0f, true);
+}
+
 
 
 void ANetGameMode::EndGame()
@@ -138,6 +193,7 @@ void ANetGameMode::EndGame()
 	PlayerStartIndex = 0;
 	TotalGames++;
 	GetGameState<ANetGameState>() -> WinningPlayer = -1;
+	CurrentTimer = MaxTimer	;
 
 	for(APlayerController* Player : AllPlayers)
 	{

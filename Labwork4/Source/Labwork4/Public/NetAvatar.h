@@ -33,19 +33,21 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	float MovementScale;
 
+	void SetRunState(bool bNewRunState);
+
+	UFUNCTION(Server, Reliable)
+	void ServerSetRunState(bool _isRunning);
+
 	UFUNCTION()
 	void OnRep_bIsRunning();
 
-	UFUNCTION()
-	void UpdateMovementSpeed();
-
-	UFUNCTION(Server, Reliable)
-	void ServerSetIsRunning(bool _isRunning);
-
 public:
 
-	UPROPERTY(EditAnywhere, BLueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float RunSpeed;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float WalkSpeed;
 
 	UPROPERTY(VisibleAnywhere, ReplicatedUsing = OnRep_bIsRunning)
 	bool bIsRunning;
