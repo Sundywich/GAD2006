@@ -23,11 +23,11 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Replicated)
 	int PlayerIndex;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	EPlayerTeam TeamID;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Replicated)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	EGameResults Result;
-
 public:
 	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
 

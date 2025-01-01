@@ -4,6 +4,7 @@
 #include "NetGameMode.h"
 
 #include <ios>
+#include <MacTypes.h>
 
 #include "NetBaseCharacter.h"
 #include "NetGameState.h"
@@ -11,14 +12,79 @@
 #include "EngineUtils.h"
 #include "GameFramework/PlayerStart.h"
 #include "Components/CapsuleComponent.h"
+#include "GameFramework/GameMode.h"
 #include "Slate/SGameLayerManager.h"
 
-ANetGameMode::ANetGameMode() : MaxTimer(30.0f)
+ANetGameMode::ANetGameMode() : MaxTimer(21.0f)
 {
+	bReplicates = true;
+	
 	DefaultPawnClass = ANetBaseCharacter::StaticClass();
 	PlayerStateClass = ANetPlayerState::StaticClass();
 	GameStateClass = ANetGameState::StaticClass();
 }
+
+void ANetGameMode::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+}
+
+void ANetGameMode::BeginPlay()
+{
+	Super::BeginPlay();
+
+	CurrentTimer = MaxTimer;
+	GWorld -> GetTimerManager().SetTimer(GameTimerHandle, this, &ANetGameMode::Timer, 1.0f, true);
+}
+
+
+void ANetGameMode::Timer()
+{
+	if(HasAuthority())
+	{
+		if(CurrentTimer > 0)
+		{
+			CurrentTimer--;
+			GEngine -> AddOnScreenDebugMessage(-1, 2.5f, FColor::Emerald, FString::Printf(TEXT("Current Timer: %f"), CurrentTimer));
+		}
+		else
+		{
+			TimerIsFinished();
+		}
+	}
+}
+
+void ANetGameMode::TimerIsFinished()
+{
+	ANetGameState* GState = GetGameState<ANetGameState>();
+	if(GState == nullptr || GState -> WinningPlayer >= 0) return;
+
+	// Change time is over so clients can run OnRep
+	GState -> bTimeIsOver = true;
+	
+	for (APlayerController* Player : AllPlayers)
+	{
+		auto State = Player -> GetPlayerState<ANetPlayerState>();
+
+		if(State -> TeamID == EPlayerTeam::TEAM_Red)
+		{
+			State -> Result = EGameResults::RESULT_Lost;
+		}
+		else
+		{
+			State -> Result = EGameResults::RESULT_Won;
+		}
+	}
+
+	// Run on victory (Because server can't run OnRep on itself)
+	GState -> OnVictoryBlue();
+
+	GWorld -> GetTimerManager().PauseTimer(GameTimerHandle);
+
+	FTimerHandle EndGameTimerHandle;
+	GWorld -> GetTimerManager().SetTimer(EndGameTimerHandle, this, &ANetGameMode::EndGame, 2.5f, false);
+}
+
 
 
 AActor* ANetGameMode::GetPlayerStart(FString Name, int Index)
@@ -109,91 +175,38 @@ void ANetGameMode::AvatarsOverlapped(ANetAvatar* AvatarA, ANetAvatar* AvatarB)
 	// Close collisions to make sure this function doesn't run again
 	AvatarA -> GetCapsuleComponent() -> SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
 	AvatarB -> GetCapsuleComponent() -> SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+	
+	for (APlayerController* Player : AllPlayers)
+	{
+		auto State = Player -> GetPlayerState<ANetPlayerState>();
+
+		if(State -> TeamID == EPlayerTeam::TEAM_Blue)
+		{
+			State -> Result = EGameResults::RESULT_Lost;
+		}
+		else
+		{
+			State -> Result = EGameResults::RESULT_Won;
+		}
+	}
 
 	// Run on victory
-	GState -> OnVictory();
-
-	for (APlayerController* Player : AllPlayers)
-	{
-		auto State = Player -> GetPlayerState<ANetPlayerState>();
-
-		if(State -> TeamID == EPlayerTeam::TEAM_Blue)
-		{
-			State -> Result = EGameResults::RESULT_Lost;
-		}
-		else
-		{
-			State -> Result = EGameResults::RESULT_Won;
-		}
-	}
+	GState -> OnVictoryRed();
 
 	FTimerHandle EndGameTimerHandle;
 	GWorld -> GetTimerManager().SetTimer(EndGameTimerHandle, this, &ANetGameMode::EndGame, 2.5f, false);
 }
-
-void ANetGameMode::Timer()
-{
-	if(HasAuthority())
-	{
-		if (CurrentTimer > 0)
-		{
-			CurrentTimer--;
-			GEngine -> AddOnScreenDebugMessage(-1, 2.5f, FColor::Red, FString::Printf(TEXT("Timer is %f"), CurrentTimer));
-		}
-		else
-		{
-			TimeIsFinished();
-		}
-	}
-}
-
-void ANetGameMode::TimeIsFinished_Implementation()
-{
-	ANetGameState* GState = GetGameState<ANetGameState>();
-	if(GState == nullptr || GState -> WinningPlayer >= 0) return;
-
-	for (APlayerController* Player : AllPlayers)
-	{
-		auto State = Player -> GetPlayerState<ANetPlayerState>();
-
-		if(State -> TeamID == EPlayerTeam::TEAM_Blue)
-		{
-			// Set the game's winner
-			GState -> WinningPlayer = State -> PlayerIndex;
-			State -> Result = EGameResults::RESULT_Won;
-
-			GEngine -> AddOnScreenDebugMessage(-1, 2.5f,FColor::Magenta, FString::Printf(TEXT("Winning Playe Index: %i"), GState -> WinningPlayer) );
-			
-		}
-		else
-		{
-			State -> Result = EGameResults::RESULT_Lost;
-		}
-		
-	}
-
-	GState -> OnVictory();
-	
-	FTimerHandle EndGameTimerHandle;
-	GWorld -> GetTimerManager().SetTimer(EndGameTimerHandle, this, &ANetGameMode::EndGame, 2.5f, false);
-}
-
-void ANetGameMode::BeginPlay()
-{
-	Super::BeginPlay();
-
-	CurrentTimer = 30.0f;
-	GWorld -> GetTimerManager().SetTimer(GameTimerHandle, this, &ANetGameMode::Timer, 1.0f, true);
-}
-
-
 
 void ANetGameMode::EndGame()
 {
 	PlayerStartIndex = 0;
 	TotalGames++;
 	GetGameState<ANetGameState>() -> WinningPlayer = -1;
-	CurrentTimer = MaxTimer	;
+
+	// I added
+	GetGameState<ANetGameState>() -> bTimeIsOver = false;
+	CurrentTimer = MaxTimer;
+	GWorld -> GetTimerManager().UnPauseTimer(GameTimerHandle);
 
 	for(APlayerController* Player : AllPlayers)
 	{

@@ -10,9 +10,6 @@ void ANetPlayerState::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(ANetPlayerState, Data);
 	DOREPLIFETIME(ANetPlayerState, PlayerIndex);
-
-	// I added
-	DOREPLIFETIME(ANetPlayerState, Result);
 }
 
 // Runs after client player recieved their PlayerInfo

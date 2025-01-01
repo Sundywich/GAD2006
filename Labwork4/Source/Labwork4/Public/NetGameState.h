@@ -28,8 +28,28 @@ public:
 	UFUNCTION()
 	void OnRep_Winner();
 
+
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, ReplicatedUsing = OnRep_TimeIsOver)
+	bool bTimeIsOver;
+
+	UFUNCTION()
+	void OnRep_TimeIsOver();
+	
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void OnVictory();
+	void OnVictoryRed();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnVictoryBlue();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayOnPlayerLost(ANetPlayerState* PState);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayOnPlayerWon(ANetPlayerState* PState);
+
+	UFUNCTION(BlueprintNativeEvent)
+	void ShowResultMessageOnBlueVictory();
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnRestart();
@@ -39,4 +59,5 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	ANetPlayerState* GetPlayerStateByIndex(int PlayerIndex);
+
 };

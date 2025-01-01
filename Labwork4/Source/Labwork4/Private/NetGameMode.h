@@ -6,6 +6,8 @@
 #include "GameFramework/GameModeBase.h"
 #include "NetAvatar.h"
 #include "NetGameMode.generated.h"
+
+class ANetGameState;
 /**
  * 
  */
@@ -23,24 +25,24 @@ public:
 	void AvatarsOverlapped(ANetAvatar* AvatarA, ANetAvatar* AvatarB);
 
 	UFUNCTION(BlueprintCallable)
-	void Timer();
-
-	UFUNCTION(Server, Reliable)
-	void TimeIsFinished();
-
-	UFUNCTION(BlueprintCallable)
 	void EndGame();
-	
-	virtual void BeginPlay() override;
 
 	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
 
+	UFUNCTION(BlueprintCallable)
+	void Timer();
+
+	UFUNCTION()
+	void TimerIsFinished();
+
+	virtual void BeginPlay() override;
+
 public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	float CurrentTimer;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float MaxTimer;
-
-	UPROPERTY()
-	float CurrentTimer;
 
 	UPROPERTY()
 	FTimerHandle GameTimerHandle;
