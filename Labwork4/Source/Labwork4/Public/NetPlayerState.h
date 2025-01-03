@@ -25,14 +25,10 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	EPlayerTeam TeamID;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	EGameResults Result;
-public:
-	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
 
 private:
-
 	UFUNCTION()
 	void OnRep_PlayerInfo();
 };

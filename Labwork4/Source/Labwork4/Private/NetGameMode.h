@@ -8,6 +8,7 @@
 #include "NetGameMode.generated.h"
 
 class ANetGameState;
+class ANetPlayerState;
 /**
  * 
  */
@@ -28,24 +29,21 @@ public:
 	void EndGame();
 
 	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
+	
+	virtual void PostLogin(APlayerController* NewPlayer) override;
 
-	UFUNCTION(BlueprintCallable)
-	void Timer();
+	UFUNCTION(NetMulticast, Reliable)
+	void TimeFinish();
+
+	ANetAvatar* GetPlayerAvatar(APlayerController* Player) const;
 
 	UFUNCTION()
-	void TimerIsFinished();
+	void SetWinningAvatar(ANetAvatar* AvatarA, ANetAvatar* AvatarB, bool bRedTeamWon);
 
-	virtual void BeginPlay() override;
+	void UpdateAvatarCollision(ANetAvatar* AvatarA, ANetAvatar* AvatarB) const;
 
-public:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	float CurrentTimer;
+	void UpdatePlayerResults(bool bRedTeamWon);
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float MaxTimer;
-
-	UPROPERTY()
-	FTimerHandle GameTimerHandle;
 	
 private:
 	int TotalPlayerCount;
@@ -55,7 +53,8 @@ private:
 	TArray<APlayerController*> AllPlayers;
 
 	AActor* GetPlayerStart(FString Name, int Index);
-
 	AActor* AssignTeamAndPlayerStart(AController* Player);
+	AActor* GetTeamStartLocation(EPlayerTeam TeamID);
+	AActor* GetNextTeamStartLocation(ANetPlayerState* State);
 	
 };

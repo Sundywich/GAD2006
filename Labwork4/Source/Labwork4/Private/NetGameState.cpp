@@ -4,11 +4,12 @@
 #include "NetGameState.h"
 
 #include "NetAvatar.h"
+#include "NetGameMode.h"
 #include "NetPlayerState.h"
 #include "Audio/ISoundHandleSystem.h"
 #include "Net/UnrealNetwork.h"
 
-ANetGameState::ANetGameState() : WinningPlayer(-1), bTimeIsOver(false)
+ANetGameState::ANetGameState() : WinningPlayer(-1), GameTimer(5.0f), RemainingTime(GameTimer)
 {
 	bReplicates = true;
 }
@@ -17,64 +18,21 @@ void ANetGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(ANetGameState, WinningPlayer);
-
-	// I Added
-	DOREPLIFETIME(ANetGameState, bTimeIsOver);
 }
-
 
 void ANetGameState::OnRep_Winner()
 {
 	if(WinningPlayer >= 0)
 	{
-		OnVictoryRed();
-	}
-}
-
-void ANetGameState::OnRep_TimeIsOver()
-{
-	if(bTimeIsOver)
-	{
-		OnVictoryBlue();
+		OnVictory();
 	}
 }
 
 void ANetGameState::TriggerRestart_Implementation()
 {
+	TimerStart();
 	OnRestart();
 }
-
-void ANetGameState::OnVictoryBlue_Implementation()
-{
-	for(auto Player : PlayerArray)
-	{
-		ANetPlayerState* PState = Cast<ANetPlayerState>(Player);
-
-		switch(PState -> Data.TeamID)
-		{
-		case EPlayerTeam::TEAM_Unknown:
-			break;
-
-		case EPlayerTeam::TEAM_Blue:
-			PlayOnPlayerWon(PState);
-			break;
-
-		case EPlayerTeam::TEAM_Red:
-			PlayOnPlayerWon(PState);
-			break;
-		}
-	}
-
-	ShowResultMessageOnBlueVictory();
-	
-}
-
-void ANetGameState::ShowResultMessageOnBlueVictory_Implementation()
-{
-	
-}
-
-
 
 ANetPlayerState* ANetGameState::GetPlayerStateByIndex(int PlayerIndex) // Give me the state of the player that's equal to this index 
 {
@@ -89,6 +47,42 @@ ANetPlayerState* ANetGameState::GetPlayerStateByIndex(int PlayerIndex) // Give m
 
 	return nullptr;
 }
+
+void ANetGameState::TimerStart()
+{
+	RemainingTime = GameTimer;
+	GetWorldTimerManager().SetTimer(TimerHandle, this, &ANetGameState::UpdateTimer, 1.0f, true);
+}
+
+void ANetGameState::TimerStop_Implementation()
+{
+	GetWorldTimerManager().ClearTimer(TimerHandle);
+}
+
+void ANetGameState::UpdateTimer()
+{
+	if (RemainingTime > 0)
+	{
+		RemainingTime -= 1.0f;
+		UpdateTimerDisplay(RemainingTime);
+	}
+	else
+	{
+		ANetGameMode* GMode = Cast<ANetGameMode>(GetWorld()->GetAuthGameMode());
+		if (GMode)
+		{
+			GMode->TimeFinish();
+		}
+	}
+}
+
+void ANetGameState::OnRep_RemainingTime()
+{
+	UpdateTimerDisplay(RemainingTime);
+}
+
+
+
 
 
 
