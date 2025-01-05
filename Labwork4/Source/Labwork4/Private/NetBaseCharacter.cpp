@@ -62,6 +62,8 @@ void ANetBaseCharacter::BeginPlay()
 	if(GetNetMode() == NM_Standalone) return;
 	SetActorHiddenInGame(true);
 	CheckPlayerState();
+
+	
 }
 
 
@@ -139,6 +141,7 @@ void ANetBaseCharacter::CheckPlayerState()
 			if(Instance)
 			{
 				SubmitPlayerInfoToServer(Instance -> PlayerInfo);
+				GEngine -> AddOnScreenDebugMessage(-1, 2.5f, FColor::Silver, TEXT("Info sent to server"));
 			}
 		}
 

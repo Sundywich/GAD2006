@@ -3,10 +3,8 @@
 
 #include "NetGameState.h"
 
-#include "NetAvatar.h"
 #include "NetGameMode.h"
 #include "NetPlayerState.h"
-#include "Audio/ISoundHandleSystem.h"
 #include "Net/UnrealNetwork.h"
 
 ANetGameState::ANetGameState() : WinningPlayer(-1), GameTimer(5.0f), RemainingTime(GameTimer)

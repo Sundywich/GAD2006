@@ -2,10 +2,6 @@
 
 
 #include "NetGameMode.h"
-
-#include <ios>
-#include <MacTypes.h>
-
 #include "NetBaseCharacter.h"
 #include "NetGameState.h"
 #include "NetPlayerState.h"
@@ -13,7 +9,6 @@
 #include "GameFramework/PlayerStart.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/GameMode.h"
-#include "Slate/SGameLayerManager.h"
 
 ANetGameMode::ANetGameMode() 
 {
@@ -76,7 +71,6 @@ AActor* ANetGameMode::AssignTeamAndPlayerStart(AController* Player)
 	ANetPlayerState* State = Player -> GetPlayerState<ANetPlayerState>();
 	if(State)
 	{
-
 		if(TotalGames == 0)
 		{
 			State -> TeamID = TotalPlayerCount == 0 ? EPlayerTeam::TEAM_Blue : EPlayerTeam::TEAM_Red;
@@ -203,7 +197,7 @@ void ANetGameMode::TimeFinish_Implementation()
 
 	if (AvatarA && AvatarB)
 	{
-		SetWinningAvatar(AvatarA, AvatarB, true);
+		SetWinningAvatar(AvatarA, AvatarB, false);
 	}
 	else
 	{
@@ -243,6 +237,7 @@ void ANetGameMode::SetWinningAvatar(ANetAvatar* AvatarA, ANetAvatar* AvatarB, bo
 		? StateA->PlayerIndex
 		: StateB->PlayerIndex;
 
+	
 	UpdateAvatarCollision(AvatarA, AvatarB);
 	UpdatePlayerResults(bRedTeamWon);
 
