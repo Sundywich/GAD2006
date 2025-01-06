@@ -100,7 +100,7 @@ public:
 	UStaticMeshComponent* PartEyebrow;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	
 	bool PlayerInfoReceived;
 
 private:

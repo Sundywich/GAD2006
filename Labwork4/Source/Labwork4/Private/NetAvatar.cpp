@@ -92,7 +92,6 @@ void ANetAvatar::StopRunning()
 void ANetAvatar::OnRep_bIsRunning()
 {
 	SetRunState(bIsRunning); // to be sure
-	GEngine -> AddOnScreenDebugMessage(5, 3.0f, FColor::Blue, FString::Printf(TEXT("MaxSpeed: %f"), GetCharacterMovement() -> MaxWalkSpeed));
 }
 
 void ANetAvatar::ServerSetRunState_Implementation(bool _isRunning)
