@@ -174,48 +174,7 @@ void ANetGameMode::AvatarsOverlapped(ANetAvatar* AvatarA, ANetAvatar* AvatarB)
 	GWorld -> GetTimerManager().SetTimer(EndGameTimerHandle, this, &ANetGameMode::EndGame, 2.5f, false);
 }
 
-void ANetGameMode::TimeFinish_Implementation()
-{
-	ANetAvatar* AvatarA = nullptr;
-	ANetAvatar* AvatarB = nullptr;
-
-	for (APlayerController* Player : AllPlayers)
-	{
-		if (ANetAvatar* Avatar = GetPlayerAvatar(Player))
-		{
-			auto State = Avatar->GetPlayerState<ANetPlayerState>();
-			if (State->TeamID == EPlayerTeam::TEAM_Red)
-			{
-				AvatarB = Avatar;
-			}
-			else
-			{
-				AvatarA = Avatar;
-			}
-		}
-	}
-
-	if (AvatarA && AvatarB)
-	{
-		SetWinningAvatar(AvatarA, AvatarB, false);
-	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("AvatarA or AvatarB is nullptr in TimeFinish_Implementation!"));
-	}
-}
-
-ANetAvatar* ANetGameMode::GetPlayerAvatar(APlayerController* Player) const
-{
-	if (!Player)
-	{
-		return nullptr;
-	}
-
-	return Cast<ANetAvatar>(Player->GetPawn());
-}
-
-void ANetGameMode::SetWinningAvatar(ANetAvatar* AvatarA, ANetAvatar* AvatarB, bool bRedTeamWon)
+void ANetGameMode::SetWinnerAvatar(ANetAvatar* AvatarA, ANetAvatar* AvatarB, bool bRedTeamWon)
 {
 	ANetGameState* GState = GetGameState<ANetGameState>();
 	if (!IsValid(GState) || GState->WinningPlayer >= 0)
@@ -246,6 +205,49 @@ void ANetGameMode::SetWinningAvatar(ANetAvatar* AvatarA, ANetAvatar* AvatarB, bo
 	FTimerHandle EndGameTimerHandle;
 	GWorld->GetTimerManager().SetTimer(EndGameTimerHandle, this, &ANetGameMode::EndGame, 2.5f, false);
 }
+
+void ANetGameMode::TimeFinish_Implementation()
+{
+	ANetAvatar* AvatarA = nullptr;
+	ANetAvatar* AvatarB = nullptr;
+
+	for (APlayerController* Player : AllPlayers)
+	{
+		if (ANetAvatar* Avatar = GetPlayerAvatar(Player))
+		{
+			auto State = Avatar->GetPlayerState<ANetPlayerState>();
+			if (State->TeamID == EPlayerTeam::TEAM_Red)
+			{
+				AvatarB = Avatar;
+			}
+			else
+			{
+				AvatarA = Avatar;
+			}
+		}
+	}
+
+	if (AvatarA && AvatarB)
+	{
+		SetWinnerAvatar(AvatarA, AvatarB, false);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("AvatarA or AvatarB is nullptr in TimeFinish_Implementation!"));
+	}
+}
+
+ANetAvatar* ANetGameMode::GetPlayerAvatar(APlayerController* Player) const
+{
+	if (!Player)
+	{
+		return nullptr;
+	}
+
+	return Cast<ANetAvatar>(Player->GetPawn());
+}
+
+
 
 void ANetGameMode::UpdateAvatarCollision(ANetAvatar* AvatarA, ANetAvatar* AvatarB) const
 {

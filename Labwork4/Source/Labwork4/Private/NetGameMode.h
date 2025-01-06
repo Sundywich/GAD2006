@@ -38,7 +38,7 @@ public:
 	ANetAvatar* GetPlayerAvatar(APlayerController* Player) const;
 
 	UFUNCTION()
-	void SetWinningAvatar(ANetAvatar* AvatarA, ANetAvatar* AvatarB, bool bRedTeamWon);
+	void SetWinnerAvatar(ANetAvatar* AvatarA, ANetAvatar* AvatarB, bool bRedTeamWon);
 
 	void UpdateAvatarCollision(ANetAvatar* AvatarA, ANetAvatar* AvatarB) const;
 

@@ -26,12 +26,6 @@ void ANetGameState::OnRep_Winner()
 	}
 }
 
-void ANetGameState::TriggerRestart_Implementation()
-{
-	TimerStart();
-	OnRestart();
-}
-
 ANetPlayerState* ANetGameState::GetPlayerStateByIndex(int PlayerIndex) // Give me the state of the player that's equal to this index 
 {
 	for(APlayerState* PS : PlayerArray)
@@ -46,15 +40,26 @@ ANetPlayerState* ANetGameState::GetPlayerStateByIndex(int PlayerIndex) // Give m
 	return nullptr;
 }
 
-void ANetGameState::TimerStart()
+void ANetGameState::OnRep_RemainingTime()
 {
-	RemainingTime = GameTimer;
-	GetWorldTimerManager().SetTimer(TimerHandle, this, &ANetGameState::UpdateTimer, 1.0f, true);
+	UpdateTimerDisplay(RemainingTime);
+}
+
+void ANetGameState::TriggerRestart_Implementation()
+{
+	TimerStart();
+	OnRestart();
 }
 
 void ANetGameState::TimerStop_Implementation()
 {
 	GetWorldTimerManager().ClearTimer(TimerHandle);
+}
+
+void ANetGameState::TimerStart()
+{
+	RemainingTime = GameTimer;
+	GetWorldTimerManager().SetTimer(TimerHandle, this, &ANetGameState::UpdateTimer, 1.0f, true);
 }
 
 void ANetGameState::UpdateTimer()
@@ -74,10 +79,6 @@ void ANetGameState::UpdateTimer()
 	}
 }
 
-void ANetGameState::OnRep_RemainingTime()
-{
-	UpdateTimerDisplay(RemainingTime);
-}
 
 
 
