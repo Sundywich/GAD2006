@@ -13,7 +13,7 @@ void UNetGameInstance::Host(FString MapName, FSPlayerInfo Info)
 
 void UNetGameInstance::Join(FSPlayerInfo Info)
 {
-	GEngine -> AddOnScreenDebugMessage(0, 1.f, FColor::Green, FString::Printf(TEXT("Joining Game at %s...")), *IPAdressToJoin);
+	GEngine -> AddOnScreenDebugMessage(0, 1.f, FColor::Green, FString::Printf(TEXT("Joining Game at %s..."), *IPAdressToJoin));
 	PlayerInfo = Info;
 	GWorld -> GetFirstPlayerController() -> ClientTravel(IPAdressToJoin, ETravelType::TRAVEL_Absolute);
 }
