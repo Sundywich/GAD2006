@@ -1,0 +1,17 @@
+{
+	"version": 1,
+	"changelists": [
+		{
+			"guid": "00000000000000000000000000000000",
+			"description": "Default Uncontrolled Changelist",
+			"files": [
+				"/Users/kaanyildirim/Documents/GAD2006/FinalProject/Content/StarterContent/Blueprints/Blueprint_Effect_Smoke.uasset",
+				"/Users/kaanyildirim/Documents/GAD2006/FinalProject/Content/Blueprints/BP_FinalAvatar.uasset",
+				"/Users/kaanyildirim/Documents/GAD2006/FinalProject/Content/Maps/Lobby.umap",
+				"/Users/kaanyildirim/Documents/GAD2006/FinalProject/Content/Maps/GameMap.umap",
+				"/Users/kaanyildirim/Documents/GAD2006/FinalProject/Content/Blueprints/BP_FinalBaseGameMode.uasset",
+				"/Users/kaanyildirim/Documents/GAD2006/FinalProject/Content/Blueprints/DT_BodyParts.uasset"
+			]
+		}
+	]
+}

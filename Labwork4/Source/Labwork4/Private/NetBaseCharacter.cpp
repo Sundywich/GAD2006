@@ -6,7 +6,7 @@
 
 static UDataTable* SBodyParts = nullptr;
 
-static const TCHAR* BodyPartNames[] =
+static const char16_t* BodyPartNames[] =
 {
 	TEXT("Face"),
 	TEXT("Hair"),
