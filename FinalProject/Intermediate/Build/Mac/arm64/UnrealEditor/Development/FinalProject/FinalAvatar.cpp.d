@@ -4016,6 +4016,8 @@
   Runtime/Engine/Classes/GameFramework/SpringArmComponent.h \
   ../Intermediate/Build/Mac/UnrealEditor/Inc/Engine/UHT/SpringArmComponent.generated.h \
   /Users/kaanyildirim/Documents/GAD2006/FinalProject/Intermediate/Build/Mac/UnrealEditor/Inc/FinalProject/UHT/FinalAvatar.generated.h \
+  /Users/kaanyildirim/Documents/GAD2006/FinalProject/Source/FinalProject/Public/FinalBaseCollectible.h \
+  /Users/kaanyildirim/Documents/GAD2006/FinalProject/Intermediate/Build/Mac/UnrealEditor/Inc/FinalProject/UHT/FinalBaseCollectible.generated.h \
   /Users/kaanyildirim/Documents/GAD2006/FinalProject/Source/FinalProject/Public/HealingCollectible.h \
   /Users/kaanyildirim/Documents/GAD2006/FinalProject/Intermediate/Build/Mac/UnrealEditor/Inc/FinalProject/UHT/HealingCollectible.generated.h \
   Runtime/UMG/Public/Blueprint/UserWidget.h \

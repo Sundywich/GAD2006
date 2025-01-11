@@ -3,6 +3,7 @@
 
 #include "FinalAvatar.h"
 
+#include "FinalBaseCollectible.h"
 #include "HealingCollectible.h"
 #include "Blueprint/UserWidget.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -242,14 +243,10 @@ void AFinalAvatar::ServerInteract_Implementation()
 
 	if (bHit)
 	{
-		AHealingCollectible* Collectible = Cast<AHealingCollectible>(HitResult.GetActor());
-		if (Collectible)
+		if(AFinalBaseCollectible* Collectible = Cast<AFinalBaseCollectible>(HitResult.GetActor()))
 		{
-			// Heal the player
-			Health = FMath::Clamp(Health + Collectible->HealingAmount, 0, 100);
-
-			// Notify all clients to destroy the collectible
-			Collectible->MulticastDestroy();
+			Collectible -> OnCollect(this);
+			Collectible -> MulticastDestroy();
 		}
 	}
 }
