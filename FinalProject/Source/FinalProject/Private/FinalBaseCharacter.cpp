@@ -63,6 +63,60 @@ void AFinalBaseCharacter::BeginPlay()
 			SubmitPlayerInfoToServer(Instance->PlayerInfo);
 		}
 	}
+
+	GWorld -> GetTimerManager().SetTimer(WearMeUpTimer, this, &AFinalBaseCharacter::StartForWearing, 0.25f, false);
+}
+
+void AFinalBaseCharacter::StartForWearing()
+{
+	if(!bIsLevelStarted) return;
+
+	else
+	{
+		if(HasAuthority())
+		{
+			WearMeUp();
+		}
+		else
+		{
+			ServerWearMeUp();
+		}
+	}
+}
+
+void AFinalBaseCharacter::WearMeUp()
+{
+	MulticastWearMeUP();
+}
+
+void AFinalBaseCharacter::ServerWearMeUp_Implementation()
+{
+	WearMeUp();
+}
+
+void AFinalBaseCharacter::MulticastWearMeUP_Implementation()
+{
+	UFinalGameInstance* Instance = Cast<UFinalGameInstance>(GetWorld() -> GetGameInstance());
+
+	if(Instance)
+	{
+		int NewIndices[(int)EBodyPart::BP_COUNT];
+		NewIndices[0] = Instance -> PlayerInfo . BodyParts . Indices[0];
+		NewIndices[1] = Instance -> PlayerInfo . BodyParts . Indices[1];
+		NewIndices[2] = Instance -> PlayerInfo . BodyParts . Indices[2];
+		NewIndices[3] = Instance -> PlayerInfo . BodyParts . Indices[3];
+		NewIndices[4] = Instance -> PlayerInfo . BodyParts . Indices[4];
+		NewIndices[5] = Instance -> PlayerInfo . BodyParts . Indices[5];
+		
+		ChangeBodyPart(EBodyPart::BP_Face, NewIndices[0], true);
+		ChangeBodyPart(EBodyPart::BP_Beard, NewIndices[5], true);
+		ChangeBodyPart(EBodyPart::BP_Chest, NewIndices[2], true);
+		ChangeBodyPart(EBodyPart::BP_Hair, NewIndices[1], true);
+		ChangeBodyPart(EBodyPart::BP_Hands, NewIndices[3], true);
+		ChangeBodyPart(EBodyPart::BP_Legs, NewIndices[4], true);
+
+		GWorld -> GetTimerManager().PauseTimer(WearMeUpTimer);
+	}
 }
 
 void AFinalBaseCharacter::OnRep_PlayerInfoChanged()
@@ -158,6 +212,7 @@ void AFinalBaseCharacter::OnConstruction(const FTransform& Transform)
 {
 	UpdateBodyParts();
 }
+
 
 
 

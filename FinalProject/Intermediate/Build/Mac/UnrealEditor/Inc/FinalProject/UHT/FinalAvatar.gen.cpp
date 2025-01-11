@@ -102,13 +102,7 @@ struct Z_Construct_UFunction_AFinalAvatar_ServerInteract_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "// Interaction system\n" },
-#endif
 		{ "ModuleRelativePath", "Public/FinalAvatar.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Interaction system" },
-#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -311,19 +305,21 @@ struct Z_Construct_UClass_AFinalAvatar_Statics
 		{ "Category", "FinalAvatar" },
 		{ "ModuleRelativePath", "Public/FinalAvatar.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Stamina_MetaData[] = {
+		{ "Category", "FinalAvatar" },
+		{ "ModuleRelativePath", "Public/FinalAvatar.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_StaminaDrainRate_MetaData[] = {
+		{ "Category", "FinalAvatar" },
+		{ "ModuleRelativePath", "Public/FinalAvatar.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Health_MetaData[] = {
 		{ "Category", "FinalAvatar" },
 		{ "ModuleRelativePath", "Public/FinalAvatar.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DeathScreenWidget_MetaData[] = {
 		{ "Category", "FinalAvatar" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "// Widget System\n" },
-#endif
 		{ "ModuleRelativePath", "Public/FinalAvatar.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Widget System" },
-#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_VictoryScreenWidget_MetaData[] = {
 		{ "Category", "FinalAvatar" },
@@ -336,6 +332,8 @@ struct Z_Construct_UClass_AFinalAvatar_Statics
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_WalkSpeed;
 	static void NewProp_bIsRunning_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsRunning;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_Stamina;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_StaminaDrainRate;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_Health;
 	static const UECodeGen_Private::FClassPropertyParams NewProp_DeathScreenWidget;
 	static const UECodeGen_Private::FClassPropertyParams NewProp_VictoryScreenWidget;
@@ -344,7 +342,7 @@ struct Z_Construct_UClass_AFinalAvatar_Statics
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_AFinalAvatar_EarnDamage, "EarnDamage" }, // 36556636
 		{ &Z_Construct_UFunction_AFinalAvatar_OnRep_bIsRunning, "OnRep_bIsRunning" }, // 1752930836
-		{ &Z_Construct_UFunction_AFinalAvatar_ServerInteract, "ServerInteract" }, // 3391369664
+		{ &Z_Construct_UFunction_AFinalAvatar_ServerInteract, "ServerInteract" }, // 2720392571
 		{ &Z_Construct_UFunction_AFinalAvatar_ServerSetRunState, "ServerSetRunState" }, // 1692349196
 		{ &Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen, "ShowDeathScreen" }, // 1389519166
 		{ &Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen, "ShowVictoryScreen" }, // 3441662349
@@ -364,6 +362,8 @@ void Z_Construct_UClass_AFinalAvatar_Statics::NewProp_bIsRunning_SetBit(void* Ob
 	((AFinalAvatar*)Obj)->bIsRunning = 1;
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AFinalAvatar_Statics::NewProp_bIsRunning = { "bIsRunning", "OnRep_bIsRunning", (EPropertyFlags)0x0010000100020021, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AFinalAvatar), &Z_Construct_UClass_AFinalAvatar_Statics::NewProp_bIsRunning_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsRunning_MetaData), NewProp_bIsRunning_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFinalAvatar_Statics::NewProp_Stamina = { "Stamina", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFinalAvatar, Stamina), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Stamina_MetaData), NewProp_Stamina_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFinalAvatar_Statics::NewProp_StaminaDrainRate = { "StaminaDrainRate", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFinalAvatar, StaminaDrainRate), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_StaminaDrainRate_MetaData), NewProp_StaminaDrainRate_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_AFinalAvatar_Statics::NewProp_Health = { "Health", nullptr, (EPropertyFlags)0x0010000000000024, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFinalAvatar, Health), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Health_MetaData), NewProp_Health_MetaData) };
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AFinalAvatar_Statics::NewProp_DeathScreenWidget = { "DeathScreenWidget", nullptr, (EPropertyFlags)0x0014000000000005, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFinalAvatar, DeathScreenWidget), Z_Construct_UClass_UClass, Z_Construct_UClass_UUserWidget_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DeathScreenWidget_MetaData), NewProp_DeathScreenWidget_MetaData) };
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AFinalAvatar_Statics::NewProp_VictoryScreenWidget = { "VictoryScreenWidget", nullptr, (EPropertyFlags)0x0014000000000005, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFinalAvatar, VictoryScreenWidget), Z_Construct_UClass_UClass, Z_Construct_UClass_UUserWidget_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_VictoryScreenWidget_MetaData), NewProp_VictoryScreenWidget_MetaData) };
@@ -373,6 +373,8 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFinalAva
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_RunSpeed,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_WalkSpeed,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_bIsRunning,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_Stamina,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_StaminaDrainRate,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_Health,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_DeathScreenWidget,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_VictoryScreenWidget,
@@ -427,10 +429,10 @@ AFinalAvatar::~AFinalAvatar() {}
 struct Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AFinalAvatar, AFinalAvatar::StaticClass, TEXT("AFinalAvatar"), &Z_Registration_Info_UClass_AFinalAvatar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFinalAvatar), 3211770944U) },
+		{ Z_Construct_UClass_AFinalAvatar, AFinalAvatar::StaticClass, TEXT("AFinalAvatar"), &Z_Registration_Info_UClass_AFinalAvatar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFinalAvatar), 3537626407U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_767164477(TEXT("/Script/FinalProject"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_2770117287(TEXT("/Script/FinalProject"),
 	Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

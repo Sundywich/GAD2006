@@ -50,6 +50,14 @@ public:
 	UPROPERTY(VisibleAnywhere, ReplicatedUsing = OnRep_bIsRunning)
 	bool bIsRunning;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	float Stamina;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float StaminaDrainRate;
+
+	virtual void Tick(float DeltaTime) override;
+
 private:
 	void MoveForward(float Amount);
 	void MoveRight(float Amount);
@@ -65,9 +73,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void EarnDamage(int32 DamageAmount);
 
-	virtual void Tick(float DeltaTime) override;
-
 	// Widget System
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf <UUserWidget> DeathScreenWidget;
 
@@ -81,10 +88,12 @@ public:
 	void ShowVictoryScreen();
 
 	// Interaction system
+public:
 	UFUNCTION(Server, Reliable, WithValidation)
 	void ServerInteract();
 
 	void Interact();
+
 
 	
 };

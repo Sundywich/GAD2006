@@ -36,7 +36,7 @@ void ANewTrapTile::TriggerTrap(AActor* OtherActor)
 
 	if(PlayerAvatar)
 	{
-		PlayerAvatar -> EarnDamage(20);
+		PlayerAvatar -> EarnDamage(Damage);
 		
 		if(HasAuthority())
 		{

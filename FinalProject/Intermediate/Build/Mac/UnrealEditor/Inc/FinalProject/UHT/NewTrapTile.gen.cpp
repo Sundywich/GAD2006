@@ -162,6 +162,10 @@ struct Z_Construct_UClass_ANewTrapTile_Statics
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/NewTrapTile.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Damage_MetaData[] = {
+		{ "Category", "NewTrapTile" },
+		{ "ModuleRelativePath", "Public/NewTrapTile.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsActivated_MetaData[] = {
 		{ "Category", "NewTrapTile" },
 		{ "ModuleRelativePath", "Public/NewTrapTile.h" },
@@ -169,6 +173,7 @@ struct Z_Construct_UClass_ANewTrapTile_Statics
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_TriggerBox;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_Mesh;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_Damage;
 	static void NewProp_bIsActivated_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsActivated;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -186,6 +191,7 @@ struct Z_Construct_UClass_ANewTrapTile_Statics
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANewTrapTile_Statics::NewProp_TriggerBox = { "TriggerBox", nullptr, (EPropertyFlags)0x001000000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANewTrapTile, TriggerBox), Z_Construct_UClass_UBoxComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TriggerBox_MetaData), NewProp_TriggerBox_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANewTrapTile_Statics::NewProp_Mesh = { "Mesh", nullptr, (EPropertyFlags)0x001000000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANewTrapTile, Mesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Mesh_MetaData), NewProp_Mesh_MetaData) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ANewTrapTile_Statics::NewProp_Damage = { "Damage", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANewTrapTile, Damage), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Damage_MetaData), NewProp_Damage_MetaData) };
 void Z_Construct_UClass_ANewTrapTile_Statics::NewProp_bIsActivated_SetBit(void* Obj)
 {
 	((ANewTrapTile*)Obj)->bIsActivated = 1;
@@ -194,6 +200,7 @@ const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ANewTrapTile_Sta
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ANewTrapTile_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANewTrapTile_Statics::NewProp_TriggerBox,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANewTrapTile_Statics::NewProp_Mesh,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANewTrapTile_Statics::NewProp_Damage,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANewTrapTile_Statics::NewProp_bIsActivated,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ANewTrapTile_Statics::PropPointers) < 2048);
@@ -237,10 +244,10 @@ ANewTrapTile::~ANewTrapTile() {}
 struct Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_NewTrapTile_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ANewTrapTile, ANewTrapTile::StaticClass, TEXT("ANewTrapTile"), &Z_Registration_Info_UClass_ANewTrapTile, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANewTrapTile), 99583015U) },
+		{ Z_Construct_UClass_ANewTrapTile, ANewTrapTile::StaticClass, TEXT("ANewTrapTile"), &Z_Registration_Info_UClass_ANewTrapTile, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANewTrapTile), 198989777U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_NewTrapTile_h_2502773831(TEXT("/Script/FinalProject"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_NewTrapTile_h_871492916(TEXT("/Script/FinalProject"),
 	Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_NewTrapTile_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_NewTrapTile_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

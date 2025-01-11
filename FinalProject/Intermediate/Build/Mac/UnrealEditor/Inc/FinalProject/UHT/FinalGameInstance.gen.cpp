@@ -37,7 +37,7 @@ struct Z_Construct_UFunction_UFinalGameInstance_Host_Statics
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UFinalGameInstance_Host_Statics::NewProp_MapName = { "MapName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FinalGameInstance_eventHost_Parms, MapName), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UFinalGameInstance_Host_Statics::NewProp_PlayerInfo = { "PlayerInfo", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FinalGameInstance_eventHost_Parms, PlayerInfo), Z_Construct_UScriptStruct_FSPlayerInfo, METADATA_PARAMS(0, nullptr) }; // 526334736
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UFinalGameInstance_Host_Statics::NewProp_PlayerInfo = { "PlayerInfo", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FinalGameInstance_eventHost_Parms, PlayerInfo), Z_Construct_UScriptStruct_FSPlayerInfo, METADATA_PARAMS(0, nullptr) }; // 3244291675
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UFinalGameInstance_Host_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UFinalGameInstance_Host_Statics::NewProp_MapName,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UFinalGameInstance_Host_Statics::NewProp_PlayerInfo,
@@ -84,7 +84,7 @@ struct Z_Construct_UFunction_UFinalGameInstance_Join_Statics
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UFinalGameInstance_Join_Statics::NewProp_Address = { "Address", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FinalGameInstance_eventJoin_Parms, Address), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UFinalGameInstance_Join_Statics::NewProp_PlayerInfo = { "PlayerInfo", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FinalGameInstance_eventJoin_Parms, PlayerInfo), Z_Construct_UScriptStruct_FSPlayerInfo, METADATA_PARAMS(0, nullptr) }; // 526334736
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UFinalGameInstance_Join_Statics::NewProp_PlayerInfo = { "PlayerInfo", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FinalGameInstance_eventJoin_Parms, PlayerInfo), Z_Construct_UScriptStruct_FSPlayerInfo, METADATA_PARAMS(0, nullptr) }; // 3244291675
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UFinalGameInstance_Join_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UFinalGameInstance_Join_Statics::NewProp_Address,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UFinalGameInstance_Join_Statics::NewProp_PlayerInfo,
@@ -146,8 +146,8 @@ struct Z_Construct_UClass_UFinalGameInstance_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UFinalGameInstance_Host, "Host" }, // 1510984584
-		{ &Z_Construct_UFunction_UFinalGameInstance_Join, "Join" }, // 2025169420
+		{ &Z_Construct_UFunction_UFinalGameInstance_Host, "Host" }, // 3151921804
+		{ &Z_Construct_UFunction_UFinalGameInstance_Join, "Join" }, // 1099152825
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -155,7 +155,7 @@ struct Z_Construct_UClass_UFinalGameInstance_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UFinalGameInstance_Statics::NewProp_PlayerInfo = { "PlayerInfo", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFinalGameInstance, PlayerInfo), Z_Construct_UScriptStruct_FSPlayerInfo, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PlayerInfo_MetaData), NewProp_PlayerInfo_MetaData) }; // 526334736
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UFinalGameInstance_Statics::NewProp_PlayerInfo = { "PlayerInfo", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFinalGameInstance, PlayerInfo), Z_Construct_UScriptStruct_FSPlayerInfo, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PlayerInfo_MetaData), NewProp_PlayerInfo_MetaData) }; // 3244291675
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UFinalGameInstance_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFinalGameInstance_Statics::NewProp_PlayerInfo,
 };
@@ -201,10 +201,10 @@ UFinalGameInstance::~UFinalGameInstance() {}
 struct Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalGameInstance_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UFinalGameInstance, UFinalGameInstance::StaticClass, TEXT("UFinalGameInstance"), &Z_Registration_Info_UClass_UFinalGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UFinalGameInstance), 4186313319U) },
+		{ Z_Construct_UClass_UFinalGameInstance, UFinalGameInstance::StaticClass, TEXT("UFinalGameInstance"), &Z_Registration_Info_UClass_UFinalGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UFinalGameInstance), 4154840947U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalGameInstance_h_2138615529(TEXT("/Script/FinalProject"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalGameInstance_h_3186102264(TEXT("/Script/FinalProject"),
 	Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalGameInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalGameInstance_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

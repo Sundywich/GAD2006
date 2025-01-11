@@ -38,6 +38,9 @@ public:
 
 	void ActivateTrap();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 Damage;
+
 public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

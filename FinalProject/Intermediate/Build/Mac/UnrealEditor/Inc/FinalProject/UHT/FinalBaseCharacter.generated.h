@@ -39,7 +39,11 @@ template<> FINALPROJECT_API UScriptStruct* StaticStruct<struct FSBodyPartSelecti
 template<> FINALPROJECT_API UScriptStruct* StaticStruct<struct FSPlayerInfo>();
 
 #define FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalBaseCharacter_h_64_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual void MulticastWearMeUP_Implementation(); \
+	virtual void ServerWearMeUp_Implementation(); \
 	virtual void SubmitPlayerInfoToServer_Implementation(FSPlayerInfo Info); \
+	DECLARE_FUNCTION(execMulticastWearMeUP); \
+	DECLARE_FUNCTION(execServerWearMeUp); \
 	DECLARE_FUNCTION(execOnRep_PlayerInfoChanged); \
 	DECLARE_FUNCTION(execSubmitPlayerInfoToServer); \
 	DECLARE_FUNCTION(execChangeGender); \

@@ -186,6 +186,7 @@ struct Z_Construct_UScriptStruct_FSBodyPartSelection_Statics
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Indices_MetaData[] = {
 		{ "ArraySizeEnum", "/Script/FinalProject.EBodyPart" },
+		{ "Category", "SBodyPartSelection" },
 		{ "ModuleRelativePath", "Public/FinalBaseCharacter.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_isFemale_MetaData[] = {
@@ -203,7 +204,7 @@ struct Z_Construct_UScriptStruct_FSBodyPartSelection_Statics
 	}
 	static const UECodeGen_Private::FStructParams StructParams;
 };
-const UECodeGen_Private::FIntPropertyParams Z_Construct_UScriptStruct_FSBodyPartSelection_Statics::NewProp_Indices = { "Indices", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, CPP_ARRAY_DIM(Indices, FSBodyPartSelection), STRUCT_OFFSET(FSBodyPartSelection, Indices), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Indices_MetaData), NewProp_Indices_MetaData) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UScriptStruct_FSBodyPartSelection_Statics::NewProp_Indices = { "Indices", nullptr, (EPropertyFlags)0x0010000000020001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, CPP_ARRAY_DIM(Indices, FSBodyPartSelection), STRUCT_OFFSET(FSBodyPartSelection, Indices), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Indices_MetaData), NewProp_Indices_MetaData) };
 void Z_Construct_UScriptStruct_FSBodyPartSelection_Statics::NewProp_isFemale_SetBit(void* Obj)
 {
 	((FSBodyPartSelection*)Obj)->isFemale = 1;
@@ -277,7 +278,7 @@ struct Z_Construct_UScriptStruct_FSPlayerInfo_Statics
 	static const UECodeGen_Private::FStructParams StructParams;
 };
 const UECodeGen_Private::FTextPropertyParams Z_Construct_UScriptStruct_FSPlayerInfo_Statics::NewProp_Nickname = { "Nickname", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Text, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FSPlayerInfo, Nickname), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Nickname_MetaData), NewProp_Nickname_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FSPlayerInfo_Statics::NewProp_BodyParts = { "BodyParts", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FSPlayerInfo, BodyParts), Z_Construct_UScriptStruct_FSBodyPartSelection, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BodyParts_MetaData), NewProp_BodyParts_MetaData) }; // 3962555829
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FSPlayerInfo_Statics::NewProp_BodyParts = { "BodyParts", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FSPlayerInfo, BodyParts), Z_Construct_UScriptStruct_FSBodyPartSelection, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BodyParts_MetaData), NewProp_BodyParts_MetaData) }; // 2478797868
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FSPlayerInfo_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FSPlayerInfo_Statics::NewProp_Nickname,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FSPlayerInfo_Statics::NewProp_BodyParts,
@@ -413,6 +414,40 @@ DEFINE_FUNCTION(AFinalBaseCharacter::execChangeGender)
 }
 // End Class AFinalBaseCharacter Function ChangeGender
 
+// Begin Class AFinalBaseCharacter Function MulticastWearMeUP
+static FName NAME_AFinalBaseCharacter_MulticastWearMeUP = FName(TEXT("MulticastWearMeUP"));
+void AFinalBaseCharacter::MulticastWearMeUP()
+{
+	ProcessEvent(FindFunctionChecked(NAME_AFinalBaseCharacter_MulticastWearMeUP),NULL);
+}
+struct Z_Construct_UFunction_AFinalBaseCharacter_MulticastWearMeUP_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/FinalBaseCharacter.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFinalBaseCharacter_MulticastWearMeUP_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFinalBaseCharacter, nullptr, "MulticastWearMeUP", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00024CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFinalBaseCharacter_MulticastWearMeUP_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFinalBaseCharacter_MulticastWearMeUP_Statics::Function_MetaDataParams) };
+UFunction* Z_Construct_UFunction_AFinalBaseCharacter_MulticastWearMeUP()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFinalBaseCharacter_MulticastWearMeUP_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AFinalBaseCharacter::execMulticastWearMeUP)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->MulticastWearMeUP_Implementation();
+	P_NATIVE_END;
+}
+// End Class AFinalBaseCharacter Function MulticastWearMeUP
+
 // Begin Class AFinalBaseCharacter Function OnRep_PlayerInfoChanged
 struct Z_Construct_UFunction_AFinalBaseCharacter_OnRep_PlayerInfoChanged_Statics
 {
@@ -442,6 +477,46 @@ DEFINE_FUNCTION(AFinalBaseCharacter::execOnRep_PlayerInfoChanged)
 }
 // End Class AFinalBaseCharacter Function OnRep_PlayerInfoChanged
 
+// Begin Class AFinalBaseCharacter Function ServerWearMeUp
+static FName NAME_AFinalBaseCharacter_ServerWearMeUp = FName(TEXT("ServerWearMeUp"));
+void AFinalBaseCharacter::ServerWearMeUp()
+{
+	ProcessEvent(FindFunctionChecked(NAME_AFinalBaseCharacter_ServerWearMeUp),NULL);
+}
+struct Z_Construct_UFunction_AFinalBaseCharacter_ServerWearMeUp_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Wearing system\n" },
+#endif
+		{ "ModuleRelativePath", "Public/FinalBaseCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Wearing system" },
+#endif
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFinalBaseCharacter_ServerWearMeUp_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFinalBaseCharacter, nullptr, "ServerWearMeUp", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00220CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFinalBaseCharacter_ServerWearMeUp_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFinalBaseCharacter_ServerWearMeUp_Statics::Function_MetaDataParams) };
+UFunction* Z_Construct_UFunction_AFinalBaseCharacter_ServerWearMeUp()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFinalBaseCharacter_ServerWearMeUp_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AFinalBaseCharacter::execServerWearMeUp)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->ServerWearMeUp_Implementation();
+	P_NATIVE_END;
+}
+// End Class AFinalBaseCharacter Function ServerWearMeUp
+
 // Begin Class AFinalBaseCharacter Function SubmitPlayerInfoToServer
 struct FinalBaseCharacter_eventSubmitPlayerInfoToServer_Parms
 {
@@ -465,7 +540,7 @@ struct Z_Construct_UFunction_AFinalBaseCharacter_SubmitPlayerInfoToServer_Static
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AFinalBaseCharacter_SubmitPlayerInfoToServer_Statics::NewProp_Info = { "Info", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FinalBaseCharacter_eventSubmitPlayerInfoToServer_Parms, Info), Z_Construct_UScriptStruct_FSPlayerInfo, METADATA_PARAMS(0, nullptr) }; // 526334736
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AFinalBaseCharacter_SubmitPlayerInfoToServer_Statics::NewProp_Info = { "Info", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FinalBaseCharacter_eventSubmitPlayerInfoToServer_Parms, Info), Z_Construct_UScriptStruct_FSPlayerInfo, METADATA_PARAMS(0, nullptr) }; // 3244291675
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AFinalBaseCharacter_SubmitPlayerInfoToServer_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AFinalBaseCharacter_SubmitPlayerInfoToServer_Statics::NewProp_Info,
 };
@@ -498,7 +573,9 @@ void AFinalBaseCharacter::StaticRegisterNativesAFinalBaseCharacter()
 	static const FNameNativePtrPair Funcs[] = {
 		{ "ChangeBodyPart", &AFinalBaseCharacter::execChangeBodyPart },
 		{ "ChangeGender", &AFinalBaseCharacter::execChangeGender },
+		{ "MulticastWearMeUP", &AFinalBaseCharacter::execMulticastWearMeUP },
 		{ "OnRep_PlayerInfoChanged", &AFinalBaseCharacter::execOnRep_PlayerInfoChanged },
+		{ "ServerWearMeUp", &AFinalBaseCharacter::execServerWearMeUp },
 		{ "SubmitPlayerInfoToServer", &AFinalBaseCharacter::execSubmitPlayerInfoToServer },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -517,6 +594,10 @@ struct Z_Construct_UClass_AFinalBaseCharacter_Statics
 		{ "ModuleRelativePath", "Public/FinalBaseCharacter.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PartSelection_MetaData[] = {
+		{ "Category", "FinalBaseCharacter" },
+		{ "ModuleRelativePath", "Public/FinalBaseCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsLevelStarted_MetaData[] = {
 		{ "Category", "FinalBaseCharacter" },
 		{ "ModuleRelativePath", "Public/FinalBaseCharacter.h" },
 	};
@@ -546,6 +627,8 @@ struct Z_Construct_UClass_AFinalBaseCharacter_Statics
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStructPropertyParams NewProp_PartSelection;
+	static void NewProp_bIsLevelStarted_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsLevelStarted;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_PartFace;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_PartHair;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_PartBeard;
@@ -557,8 +640,10 @@ struct Z_Construct_UClass_AFinalBaseCharacter_Statics
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_AFinalBaseCharacter_ChangeBodyPart, "ChangeBodyPart" }, // 2326088515
 		{ &Z_Construct_UFunction_AFinalBaseCharacter_ChangeGender, "ChangeGender" }, // 3529943645
+		{ &Z_Construct_UFunction_AFinalBaseCharacter_MulticastWearMeUP, "MulticastWearMeUP" }, // 1763988528
 		{ &Z_Construct_UFunction_AFinalBaseCharacter_OnRep_PlayerInfoChanged, "OnRep_PlayerInfoChanged" }, // 3984133280
-		{ &Z_Construct_UFunction_AFinalBaseCharacter_SubmitPlayerInfoToServer, "SubmitPlayerInfoToServer" }, // 3854658358
+		{ &Z_Construct_UFunction_AFinalBaseCharacter_ServerWearMeUp, "ServerWearMeUp" }, // 2964877442
+		{ &Z_Construct_UFunction_AFinalBaseCharacter_SubmitPlayerInfoToServer, "SubmitPlayerInfoToServer" }, // 1082437494
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -566,7 +651,12 @@ struct Z_Construct_UClass_AFinalBaseCharacter_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AFinalBaseCharacter_Statics::NewProp_PartSelection = { "PartSelection", "OnRep_PlayerInfoChanged", (EPropertyFlags)0x0010000100000024, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFinalBaseCharacter, PartSelection), Z_Construct_UScriptStruct_FSBodyPartSelection, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PartSelection_MetaData), NewProp_PartSelection_MetaData) }; // 3962555829
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AFinalBaseCharacter_Statics::NewProp_PartSelection = { "PartSelection", "OnRep_PlayerInfoChanged", (EPropertyFlags)0x0010000100020025, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFinalBaseCharacter, PartSelection), Z_Construct_UScriptStruct_FSBodyPartSelection, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PartSelection_MetaData), NewProp_PartSelection_MetaData) }; // 2478797868
+void Z_Construct_UClass_AFinalBaseCharacter_Statics::NewProp_bIsLevelStarted_SetBit(void* Obj)
+{
+	((AFinalBaseCharacter*)Obj)->bIsLevelStarted = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AFinalBaseCharacter_Statics::NewProp_bIsLevelStarted = { "bIsLevelStarted", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AFinalBaseCharacter), &Z_Construct_UClass_AFinalBaseCharacter_Statics::NewProp_bIsLevelStarted_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsLevelStarted_MetaData), NewProp_bIsLevelStarted_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFinalBaseCharacter_Statics::NewProp_PartFace = { "PartFace", nullptr, (EPropertyFlags)0x0040000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFinalBaseCharacter, PartFace), Z_Construct_UClass_USkeletalMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PartFace_MetaData), NewProp_PartFace_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFinalBaseCharacter_Statics::NewProp_PartHair = { "PartHair", nullptr, (EPropertyFlags)0x0040000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFinalBaseCharacter, PartHair), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PartHair_MetaData), NewProp_PartHair_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFinalBaseCharacter_Statics::NewProp_PartBeard = { "PartBeard", nullptr, (EPropertyFlags)0x0040000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFinalBaseCharacter, PartBeard), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PartBeard_MetaData), NewProp_PartBeard_MetaData) };
@@ -575,6 +665,7 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFinalBaseChar
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFinalBaseCharacter_Statics::NewProp_PartLegs = { "PartLegs", nullptr, (EPropertyFlags)0x0040000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFinalBaseCharacter, PartLegs), Z_Construct_UClass_USkeletalMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PartLegs_MetaData), NewProp_PartLegs_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFinalBaseCharacter_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalBaseCharacter_Statics::NewProp_PartSelection,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalBaseCharacter_Statics::NewProp_bIsLevelStarted,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalBaseCharacter_Statics::NewProp_PartFace,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalBaseCharacter_Statics::NewProp_PartHair,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalBaseCharacter_Statics::NewProp_PartBeard,
@@ -634,14 +725,14 @@ struct Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Sou
 	};
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
 		{ FSMeshAssetList::StaticStruct, Z_Construct_UScriptStruct_FSMeshAssetList_Statics::NewStructOps, TEXT("SMeshAssetList"), &Z_Registration_Info_UScriptStruct_SMeshAssetList, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSMeshAssetList), 1286092118U) },
-		{ FSBodyPartSelection::StaticStruct, Z_Construct_UScriptStruct_FSBodyPartSelection_Statics::NewStructOps, TEXT("SBodyPartSelection"), &Z_Registration_Info_UScriptStruct_SBodyPartSelection, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSBodyPartSelection), 3962555829U) },
-		{ FSPlayerInfo::StaticStruct, Z_Construct_UScriptStruct_FSPlayerInfo_Statics::NewStructOps, TEXT("SPlayerInfo"), &Z_Registration_Info_UScriptStruct_SPlayerInfo, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSPlayerInfo), 526334736U) },
+		{ FSBodyPartSelection::StaticStruct, Z_Construct_UScriptStruct_FSBodyPartSelection_Statics::NewStructOps, TEXT("SBodyPartSelection"), &Z_Registration_Info_UScriptStruct_SBodyPartSelection, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSBodyPartSelection), 2478797868U) },
+		{ FSPlayerInfo::StaticStruct, Z_Construct_UScriptStruct_FSPlayerInfo_Statics::NewStructOps, TEXT("SPlayerInfo"), &Z_Registration_Info_UScriptStruct_SPlayerInfo, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSPlayerInfo), 3244291675U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AFinalBaseCharacter, AFinalBaseCharacter::StaticClass, TEXT("AFinalBaseCharacter"), &Z_Registration_Info_UClass_AFinalBaseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFinalBaseCharacter), 828076824U) },
+		{ Z_Construct_UClass_AFinalBaseCharacter, AFinalBaseCharacter::StaticClass, TEXT("AFinalBaseCharacter"), &Z_Registration_Info_UClass_AFinalBaseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFinalBaseCharacter), 863717015U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalBaseCharacter_h_3624945194(TEXT("/Script/FinalProject"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalBaseCharacter_h_3904895970(TEXT("/Script/FinalProject"),
 	Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalBaseCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalBaseCharacter_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalBaseCharacter_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalBaseCharacter_h_Statics::ScriptStructInfo),
 	Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalBaseCharacter_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalBaseCharacter_h_Statics::EnumInfo));

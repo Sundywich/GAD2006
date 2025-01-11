@@ -37,7 +37,7 @@ struct FSBodyPartSelection
 {
 	GENERATED_USTRUCT_BODY()
 
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere)
 	int Indices[(int)EBodyPart::BP_COUNT];
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -78,7 +78,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ChangeGender(bool isFemale);
 
-	UPROPERTY(BlueprintReadWrite, ReplicatedUsing = OnRep_PlayerInfoChanged)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, ReplicatedUsing = OnRep_PlayerInfoChanged)
 	FSBodyPartSelection PartSelection;
 
 	UFUNCTION(Server, Reliable)
@@ -88,6 +88,22 @@ public:
 	void OnRep_PlayerInfoChanged();
 
 	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
+
+	// Wearing system
+	UFUNCTION(Server, Reliable)
+	void ServerWearMeUp();
+
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastWearMeUP();
+
+	void WearMeUp();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsLevelStarted;
+
+	FTimerHandle WearMeUpTimer;
+
+	void StartForWearing();
 
 private:
 	UPROPERTY()

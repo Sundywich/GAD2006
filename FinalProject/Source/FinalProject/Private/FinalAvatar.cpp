@@ -7,7 +7,7 @@
 #include "Blueprint/UserWidget.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
-AFinalAvatar::AFinalAvatar() : RunSpeed(1200.0f), WalkSpeed(600.0f), Health(100)
+AFinalAvatar::AFinalAvatar() : RunSpeed(600.0f), WalkSpeed(300.0f),  Stamina(100.0f), StaminaDrainRate(10.0f), Health(100)
 {
 	PrimaryActorTick.bCanEverTick = true;
 		
@@ -16,6 +16,8 @@ AFinalAvatar::AFinalAvatar() : RunSpeed(1200.0f), WalkSpeed(600.0f), Health(100)
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera -> SetupAttachment(SpringArm, USpringArmComponent::SocketName);
+
+	GetCharacterMovement() -> MaxWalkSpeed = 300.0f;
 }
 
 void AFinalAvatar::BeginPlay()
@@ -112,6 +114,26 @@ void AFinalAvatar::SetRunState(bool bNewRunState)
 	GetCharacterMovement()->MaxWalkSpeed = bIsRunning ? RunSpeed : WalkSpeed;
 }
 
+void AFinalAvatar::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if(bIsRunning)
+	{
+		if(Stamina > 0.0f)
+			Stamina -= DeltaTime * StaminaDrainRate;
+
+		if(Stamina <= 0.0f)
+			StopRunning();
+	}
+	else
+	{
+		if(Stamina < 100.0f)
+			Stamina += DeltaTime * (StaminaDrainRate / 2);
+	}
+}
+
+
 
 void AFinalAvatar::EarnDamage(int32 DamageAmount)
 {
@@ -140,11 +162,6 @@ void AFinalAvatar::EarnDamage(int32 DamageAmount)
 			GEngine -> AddOnScreenDebugMessage(-1, 5, FColor::Blue, TEXT("Player died"));
 		}
 	}
-}
-
-void AFinalAvatar::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 }
 
 void AFinalAvatar::ShowDeathScreen_Implementation()
