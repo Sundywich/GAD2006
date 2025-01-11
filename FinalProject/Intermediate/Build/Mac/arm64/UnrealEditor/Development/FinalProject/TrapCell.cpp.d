@@ -3970,4 +3970,57 @@
   Runtime/Engine/Classes/GameFramework/Actor.h \
   /Users/kaanyildirim/Documents/GAD2006/FinalProject/Intermediate/Build/Mac/UnrealEditor/Inc/FinalProject/UHT/TrapCell.generated.h \
   Runtime/CoreUObject/Public/UObject/ObjectMacros.h \
-  Runtime/CoreUObject/Public/UObject/ScriptMacros.h
+  Runtime/CoreUObject/Public/UObject/ScriptMacros.h \
+  /Users/kaanyildirim/Documents/GAD2006/FinalProject/Source/FinalProject/Public/FinalAvatar.h \
+  /Users/kaanyildirim/Documents/GAD2006/FinalProject/Source/FinalProject/Public/FinalBaseCharacter.h \
+  Runtime/Engine/Classes/GameFramework/Character.h \
+  Runtime/CoreUObject/Public/UObject/UObjectGlobals.h \
+  Runtime/CoreUObject/Public/Templates/SubclassOf.h \
+  Runtime/CoreUObject/Public/UObject/CoreNet.h \
+  Runtime/Engine/Classes/Engine/NetSerialization.h \
+  Runtime/Engine/Classes/Engine/EngineTypes.h \
+  Runtime/Engine/Classes/Components/ActorComponent.h \
+  Runtime/Engine/Classes/GameFramework/Pawn.h \
+  Runtime/Engine/Classes/GameFramework/CharacterMovementReplication.h \
+  Runtime/CoreUObject/Public/UObject/Object.h \
+  Runtime/Core/Public/Serialization/BitWriter.h \
+  Runtime/Core/Public/Containers/BitArray.h \
+  Runtime/Experimental/Iris/Core/Public/Iris/Serialization/IrisObjectReferencePackageMap.h \
+  ../Intermediate/Build/Mac/UnrealEditor/Inc/IrisCore/UHT/IrisObjectReferencePackageMap.generated.h \
+  ../Intermediate/Build/Mac/UnrealEditor/Inc/Engine/UHT/CharacterMovementReplication.generated.h \
+  Runtime/Engine/Classes/Animation/AnimationAsset.h \
+  Runtime/Engine/Classes/GameFramework/RootMotionSource.h \
+  Runtime/Core/Public/HAL/IConsoleManager.h \
+  Runtime/CoreUObject/Public/UObject/Class.h \
+  ../Intermediate/Build/Mac/UnrealEditor/Inc/Engine/UHT/RootMotionSource.generated.h \
+  ../Intermediate/Build/Mac/UnrealEditor/Inc/Engine/UHT/Character.generated.h \
+  Runtime/Engine/Classes/Engine/DataTable.h \
+  Runtime/Engine/Public/Net/UnrealNetwork.h \
+  Runtime/Engine/Public/EngineLogs.h \
+  Runtime/CoreUObject/Public/UObject/UnrealType.h \
+  Runtime/Engine/Classes/Engine/EngineBaseTypes.h \
+  Runtime/Net/Core/Public/Net/Core/Connection/NetResult.h \
+  Runtime/Net/Core/Public/Net/Core/PropertyConditions/PropertyConditions.h \
+  Runtime/Core/Public/Containers/Map.h \
+  Runtime/Core/Public/Delegates/IDelegateInstance.h \
+  Runtime/Core/Public/HAL/Platform.h \
+  Runtime/Core/Public/Templates/SharedPointer.h \
+  Runtime/CoreUObject/Public/UObject/ObjectKey.h \
+  Runtime/Engine/Public/Net/ReplayResult.h \
+  /Users/kaanyildirim/Documents/GAD2006/FinalProject/Intermediate/Build/Mac/UnrealEditor/Inc/FinalProject/UHT/FinalBaseCharacter.generated.h \
+  Runtime/Engine/Classes/Camera/CameraComponent.h \
+  Runtime/CoreUObject/Public/UObject/ScriptInterface.h \
+  Runtime/Engine/Classes/Components/SceneComponent.h \
+  Runtime/Engine/Classes/Engine/BlendableInterface.h \
+  Runtime/Engine/Classes/Engine/Scene.h \
+  Runtime/Engine/Classes/Camera/CameraTypes.h \
+  ../Intermediate/Build/Mac/UnrealEditor/Inc/Engine/UHT/CameraComponent.generated.h \
+  Runtime/Engine/Classes/GameFramework/SpringArmComponent.h \
+  ../Intermediate/Build/Mac/UnrealEditor/Inc/Engine/UHT/SpringArmComponent.generated.h \
+  /Users/kaanyildirim/Documents/GAD2006/FinalProject/Intermediate/Build/Mac/UnrealEditor/Inc/FinalProject/UHT/FinalAvatar.generated.h \
+  Runtime/Engine/Classes/Components/BoxComponent.h \
+  Runtime/Engine/Classes/Components/ShapeComponent.h \
+  Runtime/Engine/Classes/Components/PrimitiveComponent.h \
+  ../Intermediate/Build/Mac/UnrealEditor/Inc/Engine/UHT/ShapeComponent.generated.h \
+  Runtime/Engine/Public/ShowFlags.h \
+  ../Intermediate/Build/Mac/UnrealEditor/Inc/Engine/UHT/BoxComponent.generated.h

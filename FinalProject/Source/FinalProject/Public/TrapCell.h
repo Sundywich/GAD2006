@@ -6,21 +6,39 @@
 #include "GameFramework/Actor.h"
 #include "TrapCell.generated.h"
 
+class UBoxComponent;
+
 UCLASS()
 class FINALPROJECT_API ATrapCell : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	ATrapCell();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(ReplicatedUsing = OnRep_IsActivated, VisibleAnywhere, BlueprintReadOnly)
+	bool bIsActivated;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float DamageAmount;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UBoxComponent* CollisionBox;
+
+	void DamagePlayer(AActor* OverlappedActor);
+
+	UFUNCTION()
+	void OnOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void OnRep_IsActivated();
+
+public:
+	virtual void Tick(float DeltaSeconds) override;
+
+	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
 
 };

@@ -4,7 +4,7 @@
 #include "FinalAvatar.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
-AFinalAvatar::AFinalAvatar() : RunSpeed(1200.0f), WalkSpeed(600.0f)
+AFinalAvatar::AFinalAvatar() : RunSpeed(1200.0f), WalkSpeed(600.0f), Health(100)
 {
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm -> SetupAttachment(RootComponent);
@@ -41,6 +41,7 @@ void AFinalAvatar::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& O
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(AFinalAvatar, bIsRunning);
+	DOREPLIFETIME(AFinalAvatar, Health);
 }
 
 
@@ -103,6 +104,30 @@ void AFinalAvatar::SetRunState(bool bNewRunState)
 	bIsRunning = bNewRunState;
 	GetCharacterMovement()->MaxWalkSpeed = bIsRunning ? RunSpeed : WalkSpeed;
 }
+
+
+void AFinalAvatar::TakeDamage(int32 DamageAmount)
+{
+	if(HasAuthority())
+	{
+		Health -= DamageAmount;
+		if(Health <= 0)
+		{
+			Health = 0;
+			GEngine -> AddOnScreenDebugMessage(-1, 5, FColor::Blue, TEXT("Player died"));
+		}
+		else
+		{
+			GEngine -> AddOnScreenDebugMessage(-1, 5, FColor::Blue, TEXT("Player health: %d"), Health);
+		}
+	}
+}
+
+void AFinalAvatar::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
 
 
 

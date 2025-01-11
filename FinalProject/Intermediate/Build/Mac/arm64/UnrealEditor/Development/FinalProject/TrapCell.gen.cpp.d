@@ -3971,4 +3971,5 @@
   Runtime/Engine/Classes/GameFramework/Actor.h \
   /Users/kaanyildirim/Documents/GAD2006/FinalProject/Intermediate/Build/Mac/UnrealEditor/Inc/FinalProject/UHT/TrapCell.generated.h \
   Runtime/CoreUObject/Public/UObject/ObjectMacros.h \
-  Runtime/CoreUObject/Public/UObject/ScriptMacros.h
+  Runtime/CoreUObject/Public/UObject/ScriptMacros.h \
+  Runtime/Engine/Classes/Engine/HitResult.h
