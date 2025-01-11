@@ -2,6 +2,7 @@
 
 
 #include "FinalAvatar.h"
+#include "Blueprint/UserWidget.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 AFinalAvatar::AFinalAvatar() : RunSpeed(1200.0f), WalkSpeed(600.0f), Health(100)
@@ -11,6 +12,12 @@ AFinalAvatar::AFinalAvatar() : RunSpeed(1200.0f), WalkSpeed(600.0f), Health(100)
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera -> SetupAttachment(SpringArm, USpringArmComponent::SocketName);
+
+	/* static ConstructorHelpers::FObjectFinder<UUserWidget> W_Victory(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprints/UMG/W_Victory.W_Victory'"));
+	VictoryScreenWidget = W_Victory.Object;
+
+	static ConstructorHelpers::FObjectFinder<UUserWidget> W_Defeat(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprints/UMG/W_Defeat.W_Defeat'"));
+	DeathScreenWidget = W_Defeat.Object; */
 }
 
 void AFinalAvatar::BeginPlay()
@@ -114,11 +121,23 @@ void AFinalAvatar::EarnDamage(int32 DamageAmount)
 		if(Health <= 0)
 		{
 			Health = 0;
+
+			ShowDeathScreen();
+
+			for(FConstPlayerControllerIterator It = GetWorld() -> GetPlayerControllerIterator(); It; ++It)
+			{
+				APlayerController* PlayerController = It -> Get();
+				AFinalAvatar* OtherPlayer = Cast<AFinalAvatar>(PlayerController -> GetPawn());
+
+				if(OtherPlayer && OtherPlayer != this && OtherPlayer -> Health > 0)
+				{
+					OtherPlayer -> ShowVictoryScreen();
+				}
+			}
+
+			GetWorld() -> GetFirstPlayerController() -> SetPause(true);
+			
 			GEngine -> AddOnScreenDebugMessage(-1, 5, FColor::Blue, TEXT("Player died"));
-		}
-		else
-		{
-			GEngine -> AddOnScreenDebugMessage(-1, 5, FColor::Blue, TEXT("Player health: %d"), Health);
 		}
 	}
 }
@@ -127,6 +146,27 @@ void AFinalAvatar::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
+
+void AFinalAvatar::ShowDeathScreen_Implementation()
+{
+	if(DeathScreenWidget)
+	{
+		UUserWidget* DeathScreen = CreateWidget<UUserWidget>(GetWorld(), DeathScreenWidget);
+		
+		if(DeathScreen){ DeathScreen -> AddToViewport(); }
+	}
+}
+
+void AFinalAvatar::ShowVictoryScreen_Implementation()
+{
+	if(VictoryScreenWidget)
+	{
+		UUserWidget* VictoryScreen = CreateWidget<UUserWidget>(GetWorld(), VictoryScreenWidget);
+
+		if(VictoryScreen){ VictoryScreen -> AddToViewport(); }
+	}
+}
+
 
 
 

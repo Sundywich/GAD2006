@@ -8,6 +8,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "FinalAvatar.generated.h"
 
+class UUserWidget;
+
 /**
  * 
  */
@@ -55,7 +57,6 @@ private:
 	void StartRunning();
 	void StopRunning();
 
-
 	//HP system
 public:
 	UPROPERTY(Replicated, BlueprintReadWrite)
@@ -65,4 +66,17 @@ public:
 	void EarnDamage(int32 DamageAmount);
 
 	virtual void Tick(float DeltaTime) override;
+
+	// Widget System
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf <UUserWidget> DeathScreenWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf <UUserWidget> VictoryScreenWidget;
+
+	UFUNCTION(Client, Reliable)
+	void ShowDeathScreen();
+	
+	UFUNCTION(Client, Reliable)
+	void ShowVictoryScreen();
 };

@@ -10,11 +10,13 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeFinalAvatar() {}
 
 // Begin Cross Module References
+COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
 FINALPROJECT_API UClass* Z_Construct_UClass_AFinalAvatar();
 FINALPROJECT_API UClass* Z_Construct_UClass_AFinalAvatar_NoRegister();
 FINALPROJECT_API UClass* Z_Construct_UClass_AFinalBaseCharacter();
+UMG_API UClass* Z_Construct_UClass_UUserWidget_NoRegister();
 UPackage* Z_Construct_UPackage__Script_FinalProject();
 // End Cross Module References
 
@@ -143,6 +145,74 @@ DEFINE_FUNCTION(AFinalAvatar::execServerSetRunState)
 }
 // End Class AFinalAvatar Function ServerSetRunState
 
+// Begin Class AFinalAvatar Function ShowDeathScreen
+static FName NAME_AFinalAvatar_ShowDeathScreen = FName(TEXT("ShowDeathScreen"));
+void AFinalAvatar::ShowDeathScreen()
+{
+	ProcessEvent(FindFunctionChecked(NAME_AFinalAvatar_ShowDeathScreen),NULL);
+}
+struct Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/FinalAvatar.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFinalAvatar, nullptr, "ShowDeathScreen", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x01020CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen_Statics::Function_MetaDataParams) };
+UFunction* Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AFinalAvatar::execShowDeathScreen)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->ShowDeathScreen_Implementation();
+	P_NATIVE_END;
+}
+// End Class AFinalAvatar Function ShowDeathScreen
+
+// Begin Class AFinalAvatar Function ShowVictoryScreen
+static FName NAME_AFinalAvatar_ShowVictoryScreen = FName(TEXT("ShowVictoryScreen"));
+void AFinalAvatar::ShowVictoryScreen()
+{
+	ProcessEvent(FindFunctionChecked(NAME_AFinalAvatar_ShowVictoryScreen),NULL);
+}
+struct Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/FinalAvatar.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFinalAvatar, nullptr, "ShowVictoryScreen", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x01020CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen_Statics::Function_MetaDataParams) };
+UFunction* Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AFinalAvatar::execShowVictoryScreen)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->ShowVictoryScreen_Implementation();
+	P_NATIVE_END;
+}
+// End Class AFinalAvatar Function ShowVictoryScreen
+
 // Begin Class AFinalAvatar
 void AFinalAvatar::StaticRegisterNativesAFinalAvatar()
 {
@@ -151,6 +221,8 @@ void AFinalAvatar::StaticRegisterNativesAFinalAvatar()
 		{ "EarnDamage", &AFinalAvatar::execEarnDamage },
 		{ "OnRep_bIsRunning", &AFinalAvatar::execOnRep_bIsRunning },
 		{ "ServerSetRunState", &AFinalAvatar::execServerSetRunState },
+		{ "ShowDeathScreen", &AFinalAvatar::execShowDeathScreen },
+		{ "ShowVictoryScreen", &AFinalAvatar::execShowVictoryScreen },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
@@ -196,6 +268,20 @@ struct Z_Construct_UClass_AFinalAvatar_Statics
 		{ "Category", "FinalAvatar" },
 		{ "ModuleRelativePath", "Public/FinalAvatar.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DeathScreenWidget_MetaData[] = {
+		{ "Category", "FinalAvatar" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Widget System\n" },
+#endif
+		{ "ModuleRelativePath", "Public/FinalAvatar.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Widget System" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_VictoryScreenWidget_MetaData[] = {
+		{ "Category", "FinalAvatar" },
+		{ "ModuleRelativePath", "Public/FinalAvatar.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_Camera;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_SpringArm;
@@ -204,12 +290,16 @@ struct Z_Construct_UClass_AFinalAvatar_Statics
 	static void NewProp_bIsRunning_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsRunning;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_Health;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_DeathScreenWidget;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_VictoryScreenWidget;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_AFinalAvatar_EarnDamage, "EarnDamage" }, // 36556636
 		{ &Z_Construct_UFunction_AFinalAvatar_OnRep_bIsRunning, "OnRep_bIsRunning" }, // 1752930836
 		{ &Z_Construct_UFunction_AFinalAvatar_ServerSetRunState, "ServerSetRunState" }, // 1692349196
+		{ &Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen, "ShowDeathScreen" }, // 1389519166
+		{ &Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen, "ShowVictoryScreen" }, // 3441662349
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -227,6 +317,8 @@ void Z_Construct_UClass_AFinalAvatar_Statics::NewProp_bIsRunning_SetBit(void* Ob
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AFinalAvatar_Statics::NewProp_bIsRunning = { "bIsRunning", "OnRep_bIsRunning", (EPropertyFlags)0x0010000100020021, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AFinalAvatar), &Z_Construct_UClass_AFinalAvatar_Statics::NewProp_bIsRunning_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsRunning_MetaData), NewProp_bIsRunning_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_AFinalAvatar_Statics::NewProp_Health = { "Health", nullptr, (EPropertyFlags)0x0010000000000024, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFinalAvatar, Health), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Health_MetaData), NewProp_Health_MetaData) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AFinalAvatar_Statics::NewProp_DeathScreenWidget = { "DeathScreenWidget", nullptr, (EPropertyFlags)0x0014000000000005, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFinalAvatar, DeathScreenWidget), Z_Construct_UClass_UClass, Z_Construct_UClass_UUserWidget_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DeathScreenWidget_MetaData), NewProp_DeathScreenWidget_MetaData) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AFinalAvatar_Statics::NewProp_VictoryScreenWidget = { "VictoryScreenWidget", nullptr, (EPropertyFlags)0x0014000000000005, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFinalAvatar, VictoryScreenWidget), Z_Construct_UClass_UClass, Z_Construct_UClass_UUserWidget_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_VictoryScreenWidget_MetaData), NewProp_VictoryScreenWidget_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFinalAvatar_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_Camera,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_SpringArm,
@@ -234,6 +326,8 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFinalAva
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_WalkSpeed,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_bIsRunning,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_Health,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_DeathScreenWidget,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_VictoryScreenWidget,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AFinalAvatar_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_AFinalAvatar_Statics::DependentSingletons[])() = {
@@ -285,10 +379,10 @@ AFinalAvatar::~AFinalAvatar() {}
 struct Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AFinalAvatar, AFinalAvatar::StaticClass, TEXT("AFinalAvatar"), &Z_Registration_Info_UClass_AFinalAvatar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFinalAvatar), 50884012U) },
+		{ Z_Construct_UClass_AFinalAvatar, AFinalAvatar::StaticClass, TEXT("AFinalAvatar"), &Z_Registration_Info_UClass_AFinalAvatar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFinalAvatar), 2353338308U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_2969057213(TEXT("/Script/FinalProject"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_2310293715(TEXT("/Script/FinalProject"),
 	Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
