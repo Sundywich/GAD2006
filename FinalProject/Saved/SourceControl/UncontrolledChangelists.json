@@ -10,7 +10,8 @@
 				"/Users/kaanyildirim/Documents/GAD2006/FinalProject/Content/Maps/Lobby.umap",
 				"/Users/kaanyildirim/Documents/GAD2006/FinalProject/Content/Maps/GameMap.umap",
 				"/Users/kaanyildirim/Documents/GAD2006/FinalProject/Content/Blueprints/BP_FinalBaseGameMode.uasset",
-				"/Users/kaanyildirim/Documents/GAD2006/FinalProject/Content/Blueprints/DT_BodyParts.uasset"
+				"/Users/kaanyildirim/Documents/GAD2006/FinalProject/Content/Blueprints/DT_BodyParts.uasset",
+				"/Users/kaanyildirim/Documents/GAD2006/FinalProject/Content/Blueprints/BP_MazeCell.uasset"
 			]
 		}
 	]

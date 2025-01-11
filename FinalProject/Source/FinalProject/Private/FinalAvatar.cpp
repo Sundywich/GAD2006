@@ -4,7 +4,7 @@
 #include "FinalAvatar.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
-AFinalAvatar::AFinalAvatar()
+AFinalAvatar::AFinalAvatar() : RunSpeed(1200.0f), WalkSpeed(600.0f)
 {
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm -> SetupAttachment(RootComponent);
@@ -32,7 +32,17 @@ void AFinalAvatar::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 	PlayerInputComponent -> BindAxis("MoveForward", this, &AFinalAvatar::MoveForward);
 	PlayerInputComponent -> BindAxis("MoveRight", this, &AFinalAvatar::MoveRight);
+
+	PlayerInputComponent -> BindAction("Run", IE_Pressed, this, &AFinalAvatar::StartRunning);
+	PlayerInputComponent -> BindAction("Run", IE_Released, this, &AFinalAvatar::StopRunning);
 }
+
+void AFinalAvatar::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(AFinalAvatar, bIsRunning);
+}
+
 
 void AFinalAvatar::MoveForward(float Amount)
 {
@@ -49,6 +59,51 @@ void AFinalAvatar::MoveRight(float Amount)
 	FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 	AddMovementInput(ForwardDirection, Amount);
 }
+
+void AFinalAvatar::StartRunning()
+{
+	if(HasAuthority())
+	{
+		SetRunState(true);
+		UE_LOG(LogTemp, Display, TEXT("Server start Running"));
+	}
+	else
+	{
+		ServerSetRunState(true);
+		UE_LOG(LogTemp, Display, TEXT("Server start Running"));
+	}
+}
+
+void AFinalAvatar::StopRunning()
+{
+	if(HasAuthority())
+	{
+		SetRunState(false);
+		UE_LOG(LogTemp, Display, TEXT("Server stop Running"));
+	}
+	else
+	{
+		ServerSetRunState(false);
+		UE_LOG(LogTemp, Display, TEXT("Client stop running"));
+	}
+}
+
+void AFinalAvatar::OnRep_bIsRunning()
+{
+	SetRunState(bIsRunning);
+}
+
+void AFinalAvatar::ServerSetRunState_Implementation(bool _isRunning)
+{
+	SetRunState(_isRunning);
+}
+
+void AFinalAvatar::SetRunState(bool bNewRunState)
+{
+	bIsRunning = bNewRunState;
+	GetCharacterMovement()->MaxWalkSpeed = bIsRunning ? RunSpeed : WalkSpeed;
+}
+
 
 
 
