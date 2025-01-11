@@ -106,7 +106,7 @@ void AFinalAvatar::SetRunState(bool bNewRunState)
 }
 
 
-void AFinalAvatar::TakeDamage(int32 DamageAmount)
+void AFinalAvatar::EarnDamage(int32 DamageAmount)
 {
 	if(HasAuthority())
 	{

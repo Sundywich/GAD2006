@@ -18,6 +18,48 @@ FINALPROJECT_API UClass* Z_Construct_UClass_AFinalBaseCharacter();
 UPackage* Z_Construct_UPackage__Script_FinalProject();
 // End Cross Module References
 
+// Begin Class AFinalAvatar Function EarnDamage
+struct Z_Construct_UFunction_AFinalAvatar_EarnDamage_Statics
+{
+	struct FinalAvatar_eventEarnDamage_Parms
+	{
+		int32 DamageAmount;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/FinalAvatar.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FIntPropertyParams NewProp_DamageAmount;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_AFinalAvatar_EarnDamage_Statics::NewProp_DamageAmount = { "DamageAmount", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FinalAvatar_eventEarnDamage_Parms, DamageAmount), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AFinalAvatar_EarnDamage_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AFinalAvatar_EarnDamage_Statics::NewProp_DamageAmount,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AFinalAvatar_EarnDamage_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFinalAvatar_EarnDamage_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFinalAvatar, nullptr, "EarnDamage", nullptr, nullptr, Z_Construct_UFunction_AFinalAvatar_EarnDamage_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AFinalAvatar_EarnDamage_Statics::PropPointers), sizeof(Z_Construct_UFunction_AFinalAvatar_EarnDamage_Statics::FinalAvatar_eventEarnDamage_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFinalAvatar_EarnDamage_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFinalAvatar_EarnDamage_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_AFinalAvatar_EarnDamage_Statics::FinalAvatar_eventEarnDamage_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AFinalAvatar_EarnDamage()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFinalAvatar_EarnDamage_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AFinalAvatar::execEarnDamage)
+{
+	P_GET_PROPERTY(FIntProperty,Z_Param_DamageAmount);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->EarnDamage(Z_Param_DamageAmount);
+	P_NATIVE_END;
+}
+// End Class AFinalAvatar Function EarnDamage
+
 // Begin Class AFinalAvatar Function OnRep_bIsRunning
 struct Z_Construct_UFunction_AFinalAvatar_OnRep_bIsRunning_Statics
 {
@@ -106,6 +148,7 @@ void AFinalAvatar::StaticRegisterNativesAFinalAvatar()
 {
 	UClass* Class = AFinalAvatar::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
+		{ "EarnDamage", &AFinalAvatar::execEarnDamage },
 		{ "OnRep_bIsRunning", &AFinalAvatar::execOnRep_bIsRunning },
 		{ "ServerSetRunState", &AFinalAvatar::execServerSetRunState },
 	};
@@ -149,6 +192,10 @@ struct Z_Construct_UClass_AFinalAvatar_Statics
 		{ "Category", "FinalAvatar" },
 		{ "ModuleRelativePath", "Public/FinalAvatar.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Health_MetaData[] = {
+		{ "Category", "FinalAvatar" },
+		{ "ModuleRelativePath", "Public/FinalAvatar.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_Camera;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_SpringArm;
@@ -156,9 +203,11 @@ struct Z_Construct_UClass_AFinalAvatar_Statics
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_WalkSpeed;
 	static void NewProp_bIsRunning_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsRunning;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_Health;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
+		{ &Z_Construct_UFunction_AFinalAvatar_EarnDamage, "EarnDamage" }, // 36556636
 		{ &Z_Construct_UFunction_AFinalAvatar_OnRep_bIsRunning, "OnRep_bIsRunning" }, // 1752930836
 		{ &Z_Construct_UFunction_AFinalAvatar_ServerSetRunState, "ServerSetRunState" }, // 1692349196
 	};
@@ -177,12 +226,14 @@ void Z_Construct_UClass_AFinalAvatar_Statics::NewProp_bIsRunning_SetBit(void* Ob
 	((AFinalAvatar*)Obj)->bIsRunning = 1;
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AFinalAvatar_Statics::NewProp_bIsRunning = { "bIsRunning", "OnRep_bIsRunning", (EPropertyFlags)0x0010000100020021, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AFinalAvatar), &Z_Construct_UClass_AFinalAvatar_Statics::NewProp_bIsRunning_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsRunning_MetaData), NewProp_bIsRunning_MetaData) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_AFinalAvatar_Statics::NewProp_Health = { "Health", nullptr, (EPropertyFlags)0x0010000000000024, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFinalAvatar, Health), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Health_MetaData), NewProp_Health_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFinalAvatar_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_Camera,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_SpringArm,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_RunSpeed,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_WalkSpeed,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_bIsRunning,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFinalAvatar_Statics::NewProp_Health,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AFinalAvatar_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_AFinalAvatar_Statics::DependentSingletons[])() = {
@@ -220,8 +271,10 @@ template<> FINALPROJECT_API UClass* StaticClass<AFinalAvatar>()
 void AFinalAvatar::ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const
 {
 	static const FName Name_bIsRunning(TEXT("bIsRunning"));
+	static const FName Name_Health(TEXT("Health"));
 	const bool bIsValid = true
-		&& Name_bIsRunning == ClassReps[(int32)ENetFields_Private::bIsRunning].Property->GetFName();
+		&& Name_bIsRunning == ClassReps[(int32)ENetFields_Private::bIsRunning].Property->GetFName()
+		&& Name_Health == ClassReps[(int32)ENetFields_Private::Health].Property->GetFName();
 	checkf(bIsValid, TEXT("UHT Generated Rep Indices do not match runtime populated Rep Indices for properties in AFinalAvatar"));
 }
 DEFINE_VTABLE_PTR_HELPER_CTOR(AFinalAvatar);
@@ -232,10 +285,10 @@ AFinalAvatar::~AFinalAvatar() {}
 struct Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AFinalAvatar, AFinalAvatar::StaticClass, TEXT("AFinalAvatar"), &Z_Registration_Info_UClass_AFinalAvatar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFinalAvatar), 2901715543U) },
+		{ Z_Construct_UClass_AFinalAvatar, AFinalAvatar::StaticClass, TEXT("AFinalAvatar"), &Z_Registration_Info_UClass_AFinalAvatar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFinalAvatar), 50884012U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_3410004664(TEXT("/Script/FinalProject"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_2969057213(TEXT("/Script/FinalProject"),
 	Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

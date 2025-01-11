@@ -2,6 +2,8 @@
 
 
 #include "NewTrapTile.h"
+
+#include "FinalAvatar.h"
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
 
@@ -26,16 +28,26 @@ ANewTrapTile::ANewTrapTile() : bIsActivated(false)
 void ANewTrapTile::TriggerTrap(AActor* OtherActor)
 {
 	GEngine -> AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("PressedTheTrigger"));
+
+	if(!OtherActor || !Cast<AFinalAvatar>(OtherActor)) return;
+
 	
-	if(HasAuthority())
+	AFinalAvatar* PlayerAvatar = Cast<AFinalAvatar>(OtherActor);
+
+	if(PlayerAvatar)
 	{
-		ActivateTrap();
+		PlayerAvatar -> EarnDamage(20);
+		
+		if(HasAuthority())
+		{
+			ActivateTrap();
+		}
+		else
+		{
+			Server_ActivateTrap();
+		}
 	}
-	else
-	{
-		Server_ActivateTrap();
-	}
-	
+
 }
 
 void ANewTrapTile::Server_ActivateTrap_Implementation()

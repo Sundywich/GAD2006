@@ -16,6 +16,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 #define FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
 	virtual void ServerSetRunState_Implementation(bool NewRunState); \
+	DECLARE_FUNCTION(execEarnDamage); \
 	DECLARE_FUNCTION(execOnRep_bIsRunning); \
 	DECLARE_FUNCTION(execServerSetRunState);
 
@@ -32,7 +33,8 @@ public: \
 	{ \
 		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
 		bIsRunning=NETFIELD_REP_START, \
-		NETFIELD_REP_END=bIsRunning	}; \
+		Health, \
+		NETFIELD_REP_END=Health	}; \
 	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 

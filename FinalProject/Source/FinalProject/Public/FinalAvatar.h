@@ -62,7 +62,7 @@ public:
 	int32 Health;
 
 	UFUNCTION(BlueprintCallable)
-	void TakeDamage(int32 DamageAmount);
+	void EarnDamage(int32 DamageAmount);
 
 	virtual void Tick(float DeltaTime) override;
 };
