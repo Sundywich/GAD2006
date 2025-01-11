@@ -79,4 +79,12 @@ public:
 	
 	UFUNCTION(Client, Reliable)
 	void ShowVictoryScreen();
+
+	// Interaction system
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ServerInteract();
+
+	void Interact();
+
+	
 };

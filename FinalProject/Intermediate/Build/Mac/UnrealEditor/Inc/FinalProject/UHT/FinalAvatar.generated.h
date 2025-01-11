@@ -15,9 +15,12 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define FINALPROJECT_FinalAvatar_generated_h
 
 #define FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual bool ServerInteract_Validate(); \
+	virtual void ServerInteract_Implementation(); \
 	virtual void ShowVictoryScreen_Implementation(); \
 	virtual void ShowDeathScreen_Implementation(); \
 	virtual void ServerSetRunState_Implementation(bool NewRunState); \
+	DECLARE_FUNCTION(execServerInteract); \
 	DECLARE_FUNCTION(execShowVictoryScreen); \
 	DECLARE_FUNCTION(execShowDeathScreen); \
 	DECLARE_FUNCTION(execEarnDamage); \

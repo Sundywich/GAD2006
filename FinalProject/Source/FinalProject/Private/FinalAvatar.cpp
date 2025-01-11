@@ -2,22 +2,20 @@
 
 
 #include "FinalAvatar.h"
+
+#include "HealingCollectible.h"
 #include "Blueprint/UserWidget.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 AFinalAvatar::AFinalAvatar() : RunSpeed(1200.0f), WalkSpeed(600.0f), Health(100)
 {
+	PrimaryActorTick.bCanEverTick = true;
+		
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm -> SetupAttachment(RootComponent);
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera -> SetupAttachment(SpringArm, USpringArmComponent::SocketName);
-
-	/* static ConstructorHelpers::FObjectFinder<UUserWidget> W_Victory(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprints/UMG/W_Victory.W_Victory'"));
-	VictoryScreenWidget = W_Victory.Object;
-
-	static ConstructorHelpers::FObjectFinder<UUserWidget> W_Defeat(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprints/UMG/W_Defeat.W_Defeat'"));
-	DeathScreenWidget = W_Defeat.Object; */
 }
 
 void AFinalAvatar::BeginPlay()
@@ -42,6 +40,8 @@ void AFinalAvatar::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 	PlayerInputComponent -> BindAction("Run", IE_Pressed, this, &AFinalAvatar::StartRunning);
 	PlayerInputComponent -> BindAction("Run", IE_Released, this, &AFinalAvatar::StopRunning);
+
+	PlayerInputComponent -> BindAction("Interact", IE_Pressed, this, &AFinalAvatar::Interact);
 }
 
 void AFinalAvatar::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
@@ -166,6 +166,62 @@ void AFinalAvatar::ShowVictoryScreen_Implementation()
 		if(VictoryScreen){ VictoryScreen -> AddToViewport(); }
 	}
 }
+
+
+void AFinalAvatar::Interact()
+{
+	if(HasAuthority())
+	{
+		ServerInteract();
+	}
+	else
+	{
+		ServerInteract();
+	}
+}
+
+void AFinalAvatar::ServerInteract_Implementation()
+{
+	FVector Start = GetActorLocation();
+	FVector ForwardVector = GetActorForwardVector();
+	FVector End = Start + (ForwardVector * 500.f); // Line trace distance: 500 units
+
+	FHitResult HitResult;
+
+	FCollisionQueryParams CollisionParams;
+	CollisionParams.AddIgnoredActor(this);
+
+	bool bHit = GetWorld()->LineTraceSingleByChannel(
+		HitResult,
+		Start,
+		End,
+		ECC_Visibility,
+		CollisionParams
+	);
+
+	DrawDebugLine(GetWorld(), Start, End, bHit ? FColor::Green : FColor::Red, false, 5.0f, 0, 2.0f);
+
+	if (bHit)
+	{
+		AHealingCollectible* Collectible = Cast<AHealingCollectible>(HitResult.GetActor());
+		if (Collectible)
+		{
+			// Heal the player
+			Health = FMath::Clamp(Health + Collectible->HealingAmount, 0, 100);
+
+			// Notify all clients to destroy the collectible
+			Collectible->MulticastDestroy();
+		}
+	}
+}
+
+bool AFinalAvatar::ServerInteract_Validate()
+{
+	return true;
+}
+
+
+
 
 
 
