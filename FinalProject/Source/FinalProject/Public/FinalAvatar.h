@@ -94,6 +94,11 @@ public:
 
 	void Interact();
 
+public:
+	UFUNCTION()
+	void GameFinitoByDeath();
 
+	UFUNCTION(BlueprintCallable)
+	void GameFinitoByVictory();
 	
 };

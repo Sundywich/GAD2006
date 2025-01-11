@@ -143,26 +143,50 @@ void AFinalAvatar::EarnDamage(int32 DamageAmount)
 		if(Health <= 0)
 		{
 			Health = 0;
-
-			ShowDeathScreen();
-
-			for(FConstPlayerControllerIterator It = GetWorld() -> GetPlayerControllerIterator(); It; ++It)
-			{
-				APlayerController* PlayerController = It -> Get();
-				AFinalAvatar* OtherPlayer = Cast<AFinalAvatar>(PlayerController -> GetPawn());
-
-				if(OtherPlayer && OtherPlayer != this && OtherPlayer -> Health > 0)
-				{
-					OtherPlayer -> ShowVictoryScreen();
-				}
-			}
-
-			GetWorld() -> GetFirstPlayerController() -> SetPause(true);
-			
-			GEngine -> AddOnScreenDebugMessage(-1, 5, FColor::Blue, TEXT("Player died"));
+			GameFinitoByDeath();
 		}
 	}
 }
+
+void AFinalAvatar::GameFinitoByDeath()
+{
+	ShowDeathScreen();
+
+	for(FConstPlayerControllerIterator It = GetWorld() -> GetPlayerControllerIterator(); It; ++It)
+	{
+		APlayerController* PlayerController = It -> Get();
+		AFinalAvatar* OtherPlayer = Cast<AFinalAvatar>(PlayerController -> GetPawn());
+
+		if(OtherPlayer && OtherPlayer != this && OtherPlayer -> Health > 0)
+		{
+			OtherPlayer -> ShowVictoryScreen();
+		}
+	}
+
+	GetWorld() -> GetFirstPlayerController() -> SetPause(true);
+}
+
+void AFinalAvatar::GameFinitoByVictory()
+{
+	ShowVictoryScreen();
+
+	for(FConstPlayerControllerIterator It = GetWorld() -> GetPlayerControllerIterator(); It; ++It)
+	{
+		APlayerController* PlayerController = It -> Get();
+		AFinalAvatar* OtherPlayer = Cast<AFinalAvatar>(PlayerController -> GetPawn());
+
+		if(OtherPlayer && OtherPlayer != this)
+		{
+			OtherPlayer -> ShowDeathScreen();
+		}
+	}
+
+	GetWorld() -> GetFirstPlayerController() -> SetPause(true);
+}
+
+
+
+
 
 void AFinalAvatar::ShowDeathScreen_Implementation()
 {
@@ -215,8 +239,6 @@ void AFinalAvatar::ServerInteract_Implementation()
 		ECC_Visibility,
 		CollisionParams
 	);
-
-	DrawDebugLine(GetWorld(), Start, End, bHit ? FColor::Green : FColor::Red, false, 5.0f, 0, 2.0f);
 
 	if (bHit)
 	{

@@ -27,8 +27,7 @@ ANewTrapTile::ANewTrapTile() : bIsActivated(false)
 
 void ANewTrapTile::TriggerTrap(AActor* OtherActor)
 {
-	GEngine -> AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("PressedTheTrigger"));
-
+	
 	if(!OtherActor || !Cast<AFinalAvatar>(OtherActor)) return;
 
 	
@@ -64,7 +63,6 @@ void ANewTrapTile::Multicast_ActivateTrap_Implementation()
 {
 	Mesh -> SetVisibility(true);
 	bIsActivated = true;
-	GEngine -> AddOnScreenDebugMessage(-1, 5, FColor::Green, TEXT("PressedTheTrap"));
 }
 
 

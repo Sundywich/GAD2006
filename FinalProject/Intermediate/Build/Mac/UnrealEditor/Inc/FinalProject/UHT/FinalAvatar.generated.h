@@ -20,6 +20,8 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	virtual void ShowVictoryScreen_Implementation(); \
 	virtual void ShowDeathScreen_Implementation(); \
 	virtual void ServerSetRunState_Implementation(bool NewRunState); \
+	DECLARE_FUNCTION(execGameFinitoByVictory); \
+	DECLARE_FUNCTION(execGameFinitoByDeath); \
 	DECLARE_FUNCTION(execServerInteract); \
 	DECLARE_FUNCTION(execShowVictoryScreen); \
 	DECLARE_FUNCTION(execShowDeathScreen); \

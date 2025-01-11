@@ -63,6 +63,64 @@ DEFINE_FUNCTION(AFinalAvatar::execEarnDamage)
 }
 // End Class AFinalAvatar Function EarnDamage
 
+// Begin Class AFinalAvatar Function GameFinitoByDeath
+struct Z_Construct_UFunction_AFinalAvatar_GameFinitoByDeath_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/FinalAvatar.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFinalAvatar_GameFinitoByDeath_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFinalAvatar, nullptr, "GameFinitoByDeath", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFinalAvatar_GameFinitoByDeath_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFinalAvatar_GameFinitoByDeath_Statics::Function_MetaDataParams) };
+UFunction* Z_Construct_UFunction_AFinalAvatar_GameFinitoByDeath()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFinalAvatar_GameFinitoByDeath_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AFinalAvatar::execGameFinitoByDeath)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->GameFinitoByDeath();
+	P_NATIVE_END;
+}
+// End Class AFinalAvatar Function GameFinitoByDeath
+
+// Begin Class AFinalAvatar Function GameFinitoByVictory
+struct Z_Construct_UFunction_AFinalAvatar_GameFinitoByVictory_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/FinalAvatar.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFinalAvatar_GameFinitoByVictory_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFinalAvatar, nullptr, "GameFinitoByVictory", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFinalAvatar_GameFinitoByVictory_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFinalAvatar_GameFinitoByVictory_Statics::Function_MetaDataParams) };
+UFunction* Z_Construct_UFunction_AFinalAvatar_GameFinitoByVictory()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFinalAvatar_GameFinitoByVictory_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AFinalAvatar::execGameFinitoByVictory)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->GameFinitoByVictory();
+	P_NATIVE_END;
+}
+// End Class AFinalAvatar Function GameFinitoByVictory
+
 // Begin Class AFinalAvatar Function OnRep_bIsRunning
 struct Z_Construct_UFunction_AFinalAvatar_OnRep_bIsRunning_Statics
 {
@@ -259,6 +317,8 @@ void AFinalAvatar::StaticRegisterNativesAFinalAvatar()
 	UClass* Class = AFinalAvatar::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
 		{ "EarnDamage", &AFinalAvatar::execEarnDamage },
+		{ "GameFinitoByDeath", &AFinalAvatar::execGameFinitoByDeath },
+		{ "GameFinitoByVictory", &AFinalAvatar::execGameFinitoByVictory },
 		{ "OnRep_bIsRunning", &AFinalAvatar::execOnRep_bIsRunning },
 		{ "ServerInteract", &AFinalAvatar::execServerInteract },
 		{ "ServerSetRunState", &AFinalAvatar::execServerSetRunState },
@@ -341,6 +401,8 @@ struct Z_Construct_UClass_AFinalAvatar_Statics
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_AFinalAvatar_EarnDamage, "EarnDamage" }, // 36556636
+		{ &Z_Construct_UFunction_AFinalAvatar_GameFinitoByDeath, "GameFinitoByDeath" }, // 1350656853
+		{ &Z_Construct_UFunction_AFinalAvatar_GameFinitoByVictory, "GameFinitoByVictory" }, // 1112169849
 		{ &Z_Construct_UFunction_AFinalAvatar_OnRep_bIsRunning, "OnRep_bIsRunning" }, // 1752930836
 		{ &Z_Construct_UFunction_AFinalAvatar_ServerInteract, "ServerInteract" }, // 2720392571
 		{ &Z_Construct_UFunction_AFinalAvatar_ServerSetRunState, "ServerSetRunState" }, // 1692349196
@@ -429,10 +491,10 @@ AFinalAvatar::~AFinalAvatar() {}
 struct Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AFinalAvatar, AFinalAvatar::StaticClass, TEXT("AFinalAvatar"), &Z_Registration_Info_UClass_AFinalAvatar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFinalAvatar), 3537626407U) },
+		{ Z_Construct_UClass_AFinalAvatar, AFinalAvatar::StaticClass, TEXT("AFinalAvatar"), &Z_Registration_Info_UClass_AFinalAvatar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFinalAvatar), 1651757564U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_2770117287(TEXT("/Script/FinalProject"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_1615085386(TEXT("/Script/FinalProject"),
 	Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
