@@ -81,10 +81,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf <UUserWidget> VictoryScreenWidget;
 
-	UFUNCTION(Client, Reliable)
+	UFUNCTION(BlueprintCallable, Client, Reliable)
 	void ShowDeathScreen();
 	
-	UFUNCTION(Client, Reliable)
+	UFUNCTION(BlueprintCallable, Client, Reliable)
 	void ShowVictoryScreen();
 
 	// Interaction system

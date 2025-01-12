@@ -258,7 +258,7 @@ struct Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen_Statics
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFinalAvatar, nullptr, "ShowDeathScreen", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x01020CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFinalAvatar, nullptr, "ShowDeathScreen", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x05020CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen_Statics::Function_MetaDataParams) };
 UFunction* Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen()
 {
 	static UFunction* ReturnFunction = nullptr;
@@ -292,7 +292,7 @@ struct Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen_Statics
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFinalAvatar, nullptr, "ShowVictoryScreen", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x01020CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFinalAvatar, nullptr, "ShowVictoryScreen", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x05020CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen_Statics::Function_MetaDataParams) };
 UFunction* Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen()
 {
 	static UFunction* ReturnFunction = nullptr;
@@ -406,8 +406,8 @@ struct Z_Construct_UClass_AFinalAvatar_Statics
 		{ &Z_Construct_UFunction_AFinalAvatar_OnRep_bIsRunning, "OnRep_bIsRunning" }, // 1752930836
 		{ &Z_Construct_UFunction_AFinalAvatar_ServerInteract, "ServerInteract" }, // 2720392571
 		{ &Z_Construct_UFunction_AFinalAvatar_ServerSetRunState, "ServerSetRunState" }, // 1692349196
-		{ &Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen, "ShowDeathScreen" }, // 1389519166
-		{ &Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen, "ShowVictoryScreen" }, // 3441662349
+		{ &Z_Construct_UFunction_AFinalAvatar_ShowDeathScreen, "ShowDeathScreen" }, // 126824934
+		{ &Z_Construct_UFunction_AFinalAvatar_ShowVictoryScreen, "ShowVictoryScreen" }, // 977172868
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -491,10 +491,10 @@ AFinalAvatar::~AFinalAvatar() {}
 struct Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AFinalAvatar, AFinalAvatar::StaticClass, TEXT("AFinalAvatar"), &Z_Registration_Info_UClass_AFinalAvatar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFinalAvatar), 1651757564U) },
+		{ Z_Construct_UClass_AFinalAvatar, AFinalAvatar::StaticClass, TEXT("AFinalAvatar"), &Z_Registration_Info_UClass_AFinalAvatar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFinalAvatar), 1779589509U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_1615085386(TEXT("/Script/FinalProject"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_430050347(TEXT("/Script/FinalProject"),
 	Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_kaanyildirim_Documents_GAD2006_FinalProject_Source_FinalProject_Public_FinalAvatar_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
