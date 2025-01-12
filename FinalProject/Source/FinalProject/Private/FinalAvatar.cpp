@@ -4,6 +4,7 @@
 #include "FinalAvatar.h"
 
 #include "FinalBaseCollectible.h"
+#include "FinalBaseDoor.h"
 #include "HealingCollectible.h"
 #include "Blueprint/UserWidget.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -224,6 +225,7 @@ void AFinalAvatar::Interact()
 
 void AFinalAvatar::ServerInteract_Implementation()
 {
+#pragma region LineTrace Settings
 	FVector Start = GetActorLocation();
 	FVector ForwardVector = GetActorForwardVector();
 	FVector End = Start + (ForwardVector * 500.f); // Line trace distance: 500 units
@@ -240,6 +242,7 @@ void AFinalAvatar::ServerInteract_Implementation()
 		ECC_Visibility,
 		CollisionParams
 	);
+#pragma endregion
 
 	if (bHit)
 	{
@@ -247,6 +250,11 @@ void AFinalAvatar::ServerInteract_Implementation()
 		{
 			Collectible -> OnCollect(this);
 			Collectible -> MulticastDestroy();
+		}
+
+		if(AFinalBaseDoor* Door = Cast<AFinalBaseDoor>(HitResult.GetActor()))
+		{
+			Door -> DoorInteract(this);
 		}
 	}
 }

@@ -4018,6 +4018,11 @@
   /Users/kaanyildirim/Documents/GAD2006/FinalProject/Intermediate/Build/Mac/UnrealEditor/Inc/FinalProject/UHT/FinalAvatar.generated.h \
   /Users/kaanyildirim/Documents/GAD2006/FinalProject/Source/FinalProject/Public/FinalBaseCollectible.h \
   /Users/kaanyildirim/Documents/GAD2006/FinalProject/Intermediate/Build/Mac/UnrealEditor/Inc/FinalProject/UHT/FinalBaseCollectible.generated.h \
+  /Users/kaanyildirim/Documents/GAD2006/FinalProject/Source/FinalProject/Public/FinalBaseDoor.h \
+  /Users/kaanyildirim/Documents/GAD2006/FinalProject/Source/FinalProject/Public/FinalBaseKey.h \
+  /Users/kaanyildirim/Documents/GAD2006/FinalProject/Intermediate/Build/Mac/UnrealEditor/Inc/FinalProject/UHT/FinalBaseKey.generated.h \
+  Runtime/Engine/Classes/Components/StaticMeshComponent.h \
+  /Users/kaanyildirim/Documents/GAD2006/FinalProject/Intermediate/Build/Mac/UnrealEditor/Inc/FinalProject/UHT/FinalBaseDoor.generated.h \
   /Users/kaanyildirim/Documents/GAD2006/FinalProject/Source/FinalProject/Public/HealingCollectible.h \
   /Users/kaanyildirim/Documents/GAD2006/FinalProject/Intermediate/Build/Mac/UnrealEditor/Inc/FinalProject/UHT/HealingCollectible.generated.h \
   Runtime/UMG/Public/Blueprint/UserWidget.h \

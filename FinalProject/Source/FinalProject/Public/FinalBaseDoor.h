@@ -3,7 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FinalAvatar.h"
+#include "FinalBaseKey.h"
 #include "GameFramework/Actor.h"
+#include "Components/StaticMeshComponent.h"
 #include "FinalBaseDoor.generated.h"
 
 UCLASS()
@@ -11,16 +14,19 @@ class FINALPROJECT_API AFinalBaseDoor : public AActor
 {
 	GENERATED_BODY()
 	
-public:	
-	// Sets default values for this actor's properties
+public:
 	AFinalBaseDoor();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsOpened;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMeshComponent* DoorMesh;
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void DoorInteract(AFinalAvatar* InteractingAvatar);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EFinalBaseKeyType KeyType;
+	
 };

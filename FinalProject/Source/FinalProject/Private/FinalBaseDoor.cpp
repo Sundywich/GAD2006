@@ -6,22 +6,14 @@
 // Sets default values
 AFinalBaseDoor::AFinalBaseDoor()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	bReplicates = true;
 
-}
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 
-// Called when the game starts or when spawned
-void AFinalBaseDoor::BeginPlay()
-{
-	Super::BeginPlay();
+	DoorMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("DoorMesh"));
+	DoorMesh->SetupAttachment(RootComponent);
+	DoorMesh -> SetIsReplicated(true);
 	
-}
-
-// Called every frame
-void AFinalBaseDoor::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
 }
 
