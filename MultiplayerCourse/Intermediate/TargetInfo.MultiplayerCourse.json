@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "MultiplayerCourse",
+			"Path": "../Source/MultiplayerCourse.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "MultiplayerCourseEditor",
+			"Path": "../Source/MultiplayerCourseEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

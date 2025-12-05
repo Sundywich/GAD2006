@@ -1,0 +1,14 @@
+{
+	"version": 1,
+	"changelists": [
+		{
+			"guid": "00000000000000000000000000000000",
+			"description": "Default Uncontrolled Changelist",
+			"files": [
+				"/Users/kaanyildirim/Documents/GAD2006/MultiplayerCourse/Content/StarterContent/Maps/StarterMap_BuiltData.uasset",
+				"/Users/kaanyildirim/Documents/GAD2006/MultiplayerCourse/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/3/X9/ERSNGOW9R1YGV99OYW3X1M.uasset",
+				"/Users/kaanyildirim/Documents/GAD2006/MultiplayerCourse/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/2/YK/01BRXKQT17BXCBKCU5IZ9E.uasset"
+			]
+		}
+	]
+}
